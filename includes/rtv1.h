@@ -6,16 +6,19 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 17:37:31 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/02 15:03:51 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/03 13:24:29 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RTV1_H
 # define RTV1_H
 
+# include <math.h>
 # include "../libft/libft.h"
 # include "../minilibx/osx/mlx.h"
 # include "keycode_osx.h"
+# include "vector.h"
+# include "matrix.h"
 
 # define MIN_H 0
 # define MAX_H 1440
@@ -30,22 +33,7 @@ typedef	enum			e_section
 						SPHERE,
 						PLANE,
 						LIGHT,
-						POSITION,
-						ROTATION
 }						t_section;
-
-typedef struct			s_point
-{
-	double				x;
-	double				y;
-}						t_point;
-
-typedef struct			s_vector_3
-{
-	double				x;
-	double				y;
-	double				z;
-}						t_vector_3;
 
 typedef struct			s_img
 {
@@ -58,15 +46,15 @@ typedef struct			s_img
 
 typedef struct			s_cam
 {
-	t_vector_3			pos;
-	t_vector_3			rot;
+	t_v3				pos;
+	t_v3				rot;
 }						t_cam;
 
 typedef struct			s_obj
 {
 	char				*type;
-	t_vector_3			pos;
-	t_vector_3			rot;
+	t_v3				pos;
+	t_v3				rot;
 	double				radius;
 	int					color;
 }						t_obj;
@@ -74,7 +62,7 @@ typedef struct			s_obj
 typedef struct			s_light
 {
 	int					id;
-	t_vector_3			pos;
+	t_v3				pos;
 	double				intensity;
 }						t_light;
 
@@ -104,29 +92,14 @@ void					ft_draw_window(t_env *env);
 int						ft_expose_hook(t_env *env);
 int						ft_key_hook(int keycode, t_env *env);
 /*
-**	parser_scene.c
+**	Parser
 */
 int						ft_parse_scene(t_scene *scene, int fd);
-/*
-**	set_scene.c
-*/
 int						ft_set_window(t_scene *sc, char *line);
-/*
-**	set_camera.c
-*/
 int						ft_set_camera(t_cam *sc, char *line);
-/*
-**	set_light.c
-*/
 int						ft_set_light(t_list **light_list, char *line);
-/*
-**	set_object.c
-*/
 int						ft_set_object(t_list **object_list, char *line);
-/*
-**	parser_toolbox.c
-*/
-void					ft_set_vector3_value(t_vector_3 *vec, char *line);
+void					ft_set_v3(t_v3 *v, char *line);
 char					*ft_get_value(char *line);
 /*
 **	debug.c

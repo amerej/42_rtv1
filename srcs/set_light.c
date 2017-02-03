@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 22:59:18 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/02 15:06:40 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/03 11:10:22 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_set_light(t_list **light_list, char *line)
 	{
 		light = (t_light *)malloc(sizeof(t_light));
 		light->id = id++;
-		ft_set_vector3_value(&light->pos, tab_str[0]);
+		ft_set_v3(&light->pos, tab_str[0]);
 		light->intensity = atof(tab_str[1]);
 		ft_free_tabstr(tab_str);
 		ft_free_ptr((void **)&str);

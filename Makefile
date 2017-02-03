@@ -2,19 +2,23 @@ NAME = rtv1
 
 SRC_PATH = srcs
 
-SRC_NAME =	destroy_env.c \
-			draw.c \
-			event.c \
-			init_env.c \
-			init_scene.c \
-			init_window.c \
-			main.c \
-			parser_scene.c \
-			parser_toolbox.c \
-			set_camera.c \
-			set_light.c \
-			set_window.c \
-			set_object.c \
+SRC_NAME =	destroy_env.c\
+			draw.c\
+			event.c\
+			init_env.c\
+			init_scene.c\
+			init_window.c\
+			main.c\
+			matrix_transform.c\
+			matrix.c\
+			parser_scene.c\
+			parser_toolbox.c\
+			set_camera.c\
+			set_light.c\
+			set_window.c\
+			set_object.c\
+			vector_op1.c\
+			vector_op2.c\
 			_debug.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)

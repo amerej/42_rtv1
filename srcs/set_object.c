@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 22:59:18 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/02 16:24:54 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/03 11:10:26 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int		ft_set_sphere(t_list **obj_list, char **tab_str)
 	{
 		obj = (t_obj *)malloc(sizeof(t_obj));
 		obj->type = ft_strdup("Sphere");
-		ft_set_vector3_value(&obj->pos, tab_str[0]);
-		ft_set_vector3_value(&obj->rot, tab_str[1]);
+		ft_set_v3(&obj->pos, tab_str[0]);
+		ft_set_v3(&obj->rot, tab_str[1]);
 		obj->radius = atof(tab_str[2]);
 		obj->color = ft_atoi_base(tab_str[3], 16);
 		ft_list_push_back(obj_list, ft_list_new(obj, sizeof(t_obj)));
@@ -39,8 +39,8 @@ int		ft_set_plane(t_list **obj_list, char **tab_str)
 	{
 		obj = (t_obj *)malloc(sizeof(t_obj));
 		obj->type = ft_strdup("Plane");
-		ft_set_vector3_value(&obj->pos, tab_str[0]);
-		ft_set_vector3_value(&obj->rot, tab_str[1]);
+		ft_set_v3(&obj->pos, tab_str[0]);
+		ft_set_v3(&obj->rot, tab_str[1]);
 		obj->color = ft_atoi_base(tab_str[2], 16);
 		ft_list_push_back(obj_list, ft_list_new(obj, sizeof(t_obj)));
 		ft_free_ptr((void **)&obj);
