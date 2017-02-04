@@ -9,17 +9,14 @@ SRC_NAME =	destroy_env.c\
 			init_scene.c\
 			init_window.c\
 			main.c\
-			matrix_transform.c\
-			matrix.c\
+			parser_camera.c\
+			parser_light.c\
+			parser_object.c\
 			parser_scene.c\
 			parser_toolbox.c\
-			set_camera.c\
-			set_light.c\
-			set_window.c\
-			set_object.c\
+			parser_window.c\
 			vector_op1.c\
-			vector_op2.c\
-			_debug.c
+			vector_op2.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

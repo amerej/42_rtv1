@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy_env.c                                      :+:      :+:    :+:   */
+/*   image.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/12 09:51:44 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/04 12:09:45 by aditsch          ###   ########.fr       */
+/*   Created: 2017/02/04 11:51:39 by aditsch           #+#    #+#             */
+/*   Updated: 2017/02/04 12:19:32 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#ifndef IMAGE_H
+# define IMAGE_H
 
-void	ft_destroy_app(t_app *app)
+typedef struct	s_image
 {
-	if (app->scene)
-	{
-		ft_free_ptr((void **)&app->scene->image);
-		ft_free_ptr((void **)&app->scene->camera);
-		if (app->scene->light)
-			ft_list_del(&app->scene->light, &ft_list_del_content);
-		if (app->scene->light)
-			ft_list_del(&app->scene->object, &ft_list_del_content);
-	}
-	ft_free_ptr((void **)&app->scene);
-	ft_free_ptr((void **)&app);
-}
+	void		*img_ptr;
+	char		*data;
+	int			bpp;
+	int			size_line;
+	int			endian;
+}				t_image;
+#endif

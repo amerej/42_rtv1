@@ -6,31 +6,28 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 09:09:08 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/02 14:07:47 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/04 13:00:31 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static t_img		*ft_new_img(void)
+static t_image		*ft_new_image(void)
 {
-	t_img	*img;
+	t_image		*image;
 
-	if (!(img = (t_img *)malloc(sizeof(t_img))))
-		perror("error : img memory allocation");
-	return (img);
+	if (!(image = (t_image *)malloc(sizeof(t_image))))
+		perror("error : image memory allocation");
+	return (image);
 }
 
-static t_cam		*ft_new_cam(void)
+static t_camera		*ft_new_camera(void)
 {
-	t_cam	*cam;
+	t_camera	*camera;
 
-	if (!(cam = (t_cam *)malloc(sizeof(t_cam))))
-	{
-		perror("error : cam memory allocation");
-		return (NULL);
-	}
-	return (cam);
+	if (!(camera = (t_camera *)malloc(sizeof(t_camera))))
+		perror("error : camera memory allocation");
+	return (camera);
 }
 
 static t_scene		*ft_new_scene(void)
@@ -39,10 +36,7 @@ static t_scene		*ft_new_scene(void)
 
 	if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
 		perror("error : scene memory allocation");
-	scene->cam = NULL;
-	scene->img = NULL;
-	scene->obj_list = NULL;
-	scene->light_list = NULL;
+	*scene = (t_scene){0, 0, NULL, NULL, NULL, NULL};
 	return (scene);
 }
 
@@ -53,9 +47,9 @@ t_scene				*ft_init_scene(int fd)
 	scene = NULL;
 	if (!(scene = ft_new_scene()))
 		return (NULL);
-	else if (!(scene->cam = ft_new_cam()))
+	else if (!(scene->camera = ft_new_camera()))
 		return (NULL);
-	else if (!(scene->img = ft_new_img()))
+	else if (!(scene->image = ft_new_image()))
 		return (NULL);
 	else if (!ft_parse_scene(scene, fd))
 		return (NULL);

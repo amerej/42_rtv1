@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 09:14:54 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/02 13:25:40 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/04 12:57:21 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,25 @@
 
 int			main(int argc, char *argv[])
 {
-	t_env	*env;
+	t_app	*app;
 	int		fd;
 
 	fd = open(argv[1], O_RDONLY);
 
-	if (!(env = ft_init_env()))
-		ft_exit_perror("error : init env");
-	if (!(env->scene = ft_init_scene(fd)))
+	if (!(app = ft_init_app()))
+		ft_exit_perror("error : init app");
+	if (!(app->scene = ft_init_scene(fd)))
 	{
-		ft_destroy_env(env);
+		ft_destroy_app(app);
 		ft_exit_perror("error : init scene");
 	}
-
-	ft_display_scene_value(env->scene); // DEBUG
-
-	if (!(env->win = ft_init_window(env)))
+	if (!(app->win = ft_init_window(app)))
 	{
-		ft_destroy_env(env);
+		ft_destroy_app(app);
 		ft_exit_perror("error : init window");
 	}
-	mlx_key_hook(env->win, ft_key_hook, env);
-	mlx_expose_hook(env->win, ft_expose_hook, env);
-	mlx_loop(env->mlx);
+	mlx_key_hook(app->win, ft_key_hook, app);
+	mlx_expose_hook(app->win, ft_expose_hook, app);
+	mlx_loop(app->mlx);
 	return (FALSE);
 }

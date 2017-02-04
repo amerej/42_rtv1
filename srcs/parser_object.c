@@ -1,55 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_object.c                                       :+:      :+:    :+:   */
+/*   parser_object.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 22:59:18 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/03 11:10:26 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/04 13:04:04 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int		ft_set_sphere(t_list **obj_list, char **tab_str)
+int		ft_parse_sphere(t_list **obj, char **tab_str)
 {
-	t_obj	*obj;
+	t_sphere	*sphere;
 
 	if (ft_tabstrlen(tab_str) == 4)
 	{
-		obj = (t_obj *)malloc(sizeof(t_obj));
-		obj->type = ft_strdup("Sphere");
-		ft_set_v3(&obj->pos, tab_str[0]);
-		ft_set_v3(&obj->rot, tab_str[1]);
-		obj->radius = atof(tab_str[2]);
-		obj->color = ft_atoi_base(tab_str[3], 16);
-		ft_list_push_back(obj_list, ft_list_new(obj, sizeof(t_obj)));
-		ft_free_ptr((void **)&obj);
+		sphere = (t_sphere *)malloc(sizeof(t_sphere));
+		ft_set_vector_3(&sphere->position, tab_str[0]);
+		ft_set_vector_3(&sphere->rotation, tab_str[1]);
+		sphere->radius = atof(tab_str[2]);
+		sphere->color = ft_atoi_base(tab_str[3], 16);
+		ft_list_push_back(obj, ft_list_new(sphere, sizeof(t_sphere)));
+		ft_free_ptr((void **)&sphere);
 		return (TRUE);
 	}
 	return (FALSE);
 }
 
-int		ft_set_plane(t_list **obj_list, char **tab_str)
+int		ft_parse_plane(t_list **obj, char **tab_str)
 {
-	t_obj	*obj;
+	t_plane		*plane;
 
 	if (ft_tabstrlen(tab_str) == 3)
 	{
-		obj = (t_obj *)malloc(sizeof(t_obj));
-		obj->type = ft_strdup("Plane");
-		ft_set_v3(&obj->pos, tab_str[0]);
-		ft_set_v3(&obj->rot, tab_str[1]);
-		obj->color = ft_atoi_base(tab_str[2], 16);
-		ft_list_push_back(obj_list, ft_list_new(obj, sizeof(t_obj)));
-		ft_free_ptr((void **)&obj);
+		plane = (t_plane *)malloc(sizeof(t_plane));
+		ft_set_vector_3(&plane->position, tab_str[0]);
+		ft_set_vector_3(&plane->rotation, tab_str[1]);
+		plane->color = ft_atoi_base(tab_str[2], 16);
+		ft_list_push_back(obj, ft_list_new(plane, sizeof(t_plane)));
+		ft_free_ptr((void **)&plane);
 		return (TRUE);
 	}
 	return (FALSE);
 }
 
-int		ft_set_object(t_list **obj_list, char *line)
+int		ft_parse_object(t_list **obj, char *line)
 {
 	char	*str;
 	char	*type;
@@ -62,9 +60,9 @@ int		ft_set_object(t_list **obj_list, char *line)
 	str = ft_strtrim(str + 1);
 	tab_str = ft_strsplit(str, ',');
 	if (!ft_strcmp("Sphere", type))
-		ret = ft_set_sphere(obj_list, tab_str);
+		ret = ft_parse_sphere(obj, tab_str);
 	if (!ft_strcmp("Plane", type))
-		ret = ft_set_plane(obj_list, tab_str);
+		ret = ft_parse_plane(obj, tab_str);
 	ft_free_tabstr(tab_str);
 	ft_free_ptr((void **)&str);
 	ft_free_ptr((void **)&type);

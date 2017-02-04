@@ -6,27 +6,27 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 09:41:09 by aditsch           #+#    #+#             */
-/*   Updated: 2017/01/12 15:51:46 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/04 12:22:44 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static t_env	*ft_new_env(void)
+static t_app	*ft_new_app(void)
 {
-	t_env	*env;
+	t_app	*app;
 
-	env = NULL;
-	if (!(env = (t_env *)malloc(sizeof(t_env))))
-		ft_exit_perror("error : env memory allocation");
-	return (env);
+	app = NULL;
+	if (!(app = (t_app *)malloc(sizeof(t_app))))
+		ft_exit_perror("error : app memory allocation");
+	return (app);
 }
 
-t_env			*ft_init_env(void)
+t_app			*ft_init_app(void)
 {
-	t_env	*env;
+	t_app	*app;
 
-	if (!(env = ft_new_env()))
+	if (!(app = ft_new_app()))
 		return (NULL);
-	return (env);
+	return (app);
 }

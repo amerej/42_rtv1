@@ -6,27 +6,27 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 10:49:00 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/03 13:53:39 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/04 12:55:13 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_H
 # define VECTOR_H
 
-typedef struct	s_v3
+typedef struct	s_vector_3
 {
 	double		x;
 	double		y;
 	double		z;
 	double		w;
-}				t_v3;
+}				t_vector_3;
 
-double			ft_norm(t_v3 v);
-double			ft_length(t_v3 v);
-double			ft_dot(t_v3 a, t_v3 b);
-void			ft_normalize(t_v3 v);
-t_v3			ft_cross(t_v3 a, t_v3 b);
-t_v3			ft_add(t_v3	a, t_v3 b);
-t_v3			ft_sub(t_v3	a, t_v3 b);
-t_v3			ft_mult(t_v3 v, double r);
+double			ft_norm(t_vector_3 v);
+double			ft_length(t_vector_3 v);
+double			ft_dot(t_vector_3 a, t_vector_3 b);
+t_vector_3		ft_normalize(void);
+t_vector_3		ft_cross(t_vector_3 a, t_vector_3 b);
+t_vector_3		ft_add(t_vector_3 a, t_vector_3 b);
+t_vector_3		ft_sub(t_vector_3 a, t_vector_3 b);
+t_vector_3		ft_mult(t_vector_3 v, double r);
 #endif

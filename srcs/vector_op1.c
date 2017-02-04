@@ -6,30 +6,31 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 08:51:41 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/03 13:58:50 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/04 12:55:03 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "vector.h"
 
-double	ft_norm(t_v3 v)
+double	ft_norm(t_vector_3 v)
 {
 	return(v.x * v.x + v.y * v.y + v.z * v.z);
 }
 
-double	ft_length(t_v3 v)
+double	ft_length(t_vector_3 v)
 {
 	return (sqrt(ft_norm(v)));
 }
 
-double	ft_dot(t_v3 a, t_v3 b)
+double	ft_dot(t_vector_3 a, t_vector_3 b)
 {
 	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
-t_v3	ft_normalize(void)
+t_vector_3	ft_normalize(void)
 {
-	t_v3	v;
+	t_vector_3	v;
 	double	n;
 	double	factor;
 
@@ -44,8 +45,8 @@ t_v3	ft_normalize(void)
 	return (v);
 }
 
-t_v3	ft_cross(t_v3 a, t_v3 b)
+t_vector_3	ft_cross(t_vector_3 a, t_vector_3 b)
 {
-	return ((t_v3){a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z,
+	return ((t_vector_3){a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z,
 		a.x * b.y - a.y * b.x});
 }

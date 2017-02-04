@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_camera.c                                       :+:      :+:    :+:   */
+/*   parser_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/01 19:25:24 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/03 11:10:18 by aditsch          ###   ########.fr       */
+/*   Created: 2017/02/01 18:33:49 by aditsch           #+#    #+#             */
+/*   Updated: 2017/02/04 13:05:43 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void		ft_set_v3(t_v3 *v, char *str)
-{
-	char	**tab_str;
-
-	if ((tab_str = ft_strsplit(str, ' ')))
-	{
-		if (ft_tabstrlen(tab_str) == 3)
-		{
-			v->x = atof(tab_str[0]);
-			v->y = atof(tab_str[1]);
-			v->z = atof(tab_str[2]);
-		}
-		ft_free_tabstr(tab_str);
-	}
-}
-
-int		ft_set_camera(t_cam *cam, char *line)
+int		ft_parse_window(t_scene *scene, char *line)
 {
 	char	*str;
 	char	**tab_str;
@@ -38,8 +22,8 @@ int		ft_set_camera(t_cam *cam, char *line)
 	tab_str = ft_strsplit(str, ',');
 	if (ft_tabstrlen(tab_str) == 2)
 	{
-		ft_set_v3(&cam->pos, tab_str[0]);
-		ft_set_v3(&cam->rot, tab_str[1]);
+		scene->width = ft_atoi(tab_str[0]);
+		scene->height = ft_atoi(tab_str[1]);
 		ft_free_tabstr(tab_str);
 		ft_free_ptr((void **)&str);
 		return (TRUE);
