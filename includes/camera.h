@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 11:51:39 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/04 17:35:36 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/04 19:19:02 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct	s_camera
 	t_vector	down;
 	t_vector	look_at;
 }				t_camera;
+
+void			ft_set_camera(t_camera *cam);
 
 t_vector		ft_get_camera_position(t_camera *camera);
 t_vector		ft_get_camera_direction(t_camera *camera);

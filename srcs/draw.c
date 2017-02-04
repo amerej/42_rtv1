@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 09:21:33 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/04 18:16:23 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/04 19:18:02 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,9 @@ static void		ft_draw_img(t_app *app)
 {
 	t_vector		point;
 	t_camera		*cam;
-	t_vector_dir	v_dir;
 
 	cam = app->scene->camera;
-	v_dir = (t_vector_dir){{1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
-	cam->look_at = (t_vector){0.0, 0.0, 0.0};
-
+	ft_set_camera(cam);
 	point.y = 0.0;
 	while (point.y < app->scene->height)
 	{
