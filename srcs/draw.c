@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 09:21:33 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/04 17:43:30 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/04 18:16:23 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void		ft_put_pixel_img(t_app *app, t_vector *p, int color)
 
 static void		ft_draw_img(t_app *app)
 {
-	t_camera		*cam;
 	t_vector		point;
+	t_camera		*cam;
 	t_vector_dir	v_dir;
 
 	cam = app->scene->camera;
