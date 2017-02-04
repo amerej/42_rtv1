@@ -6,38 +6,38 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 08:51:41 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/04 12:55:03 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/04 15:48:09 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "vector.h"
 
-double	ft_norm(t_vector_3 v)
+double	ft_norm(t_vector v)
 {
-	return(v.x * v.x + v.y * v.y + v.z * v.z);
+	return((v.x * v.x) + (v.y * v.y) + (v.z * v.z));
 }
 
-double	ft_length(t_vector_3 v)
+double	ft_magnitude(t_vector v)
 {
-	return (sqrt(ft_norm(v)));
+	return (sqrt((v.x * v.x) + (v.y * v.y) + (v.z * v.z)));
 }
 
-double	ft_dot(t_vector_3 a, t_vector_3 b)
+double	ft_dot(t_vector a, t_vector b)
 {
 	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
-t_vector_3	ft_normalize(void)
+t_vector	ft_normalize(void)
 {
-	t_vector_3	v;
-	double	n;
+	t_vector	v;
+	double	magnitude;
 	double	factor;
 
-	n = ft_norm(v);
-	if (n > 0)
+	magnitude = sqrt((v.x * v.x) + (v.y * v.y) + (v.z * v.z));
+	if (magnitude > 0)
 	{
-		factor = 1 / sqrt(n);
+		factor = 1 / magnitude;
 		v.x *= factor;
 		v.y *= factor;
 		v.z *= factor;
@@ -45,8 +45,8 @@ t_vector_3	ft_normalize(void)
 	return (v);
 }
 
-t_vector_3	ft_cross(t_vector_3 a, t_vector_3 b)
+t_vector	ft_cross(t_vector a, t_vector b)
 {
-	return ((t_vector_3){a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z,
+	return ((t_vector){a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z,
 		a.x * b.y - a.y * b.x});
 }

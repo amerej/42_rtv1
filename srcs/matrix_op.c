@@ -6,15 +6,15 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 11:48:45 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/04 12:30:19 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/04 15:44:43 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix.h"
 
-void	ft_mult_vec_matrix(t_m4 m, t_v3 src, t_v3 *dst)
+void	ft_mult_vec_matrix(t_m4 m, t_vector src, t_vector *dst)
 {
-	t_v3	v;
+	t_vector	v;
 
 	v.x = src.x * m[0][0] + src.y * m[1][0] + src.z * m[2][0] + src.w * m[3][0];
 	v.y = src.x * m[0][1] + src.y * m[1][1] + src.z * m[2][1] + src.w * m[3][1];
@@ -25,9 +25,9 @@ void	ft_mult_vec_matrix(t_m4 m, t_v3 src, t_v3 *dst)
 	dst->z = v.z / v.w;
 }
 
-void	ft_mult_dir_matrix(t_m4 m, t_v3 src, t_v3 *dst)
+void	ft_mult_dir_matrix(t_m4 m, t_vector src, t_vector *dst)
 {
-	t_v3	v;
+	t_vector	v;
 
 	v.x = src.x * m[0][0] + src.y * m[1][0] + src.z * m[2][0];
 	v.y = src.x * m[0][1] + src.y * m[1][1] + src.z * m[2][1];

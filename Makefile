@@ -5,6 +5,9 @@ SRC_PATH = srcs
 SRC_NAME =	destroy_env.c\
 			draw.c\
 			event.c\
+			getter_camera.c\
+			getter_ray.c\
+			getter_vector.c\
 			init_env.c\
 			init_scene.c\
 			init_window.c\
@@ -15,6 +18,9 @@ SRC_NAME =	destroy_env.c\
 			parser_scene.c\
 			parser_toolbox.c\
 			parser_window.c\
+			setter_camera.c\
+			setter_ray.c\
+			setter_vector.c\
 			vector_op1.c\
 			vector_op2.c
 

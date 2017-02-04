@@ -6,27 +6,42 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 10:49:00 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/04 12:55:13 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/04 17:25:02 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_H
 # define VECTOR_H
 
-typedef struct	s_vector_3
+typedef struct	s_vector
 {
 	double		x;
 	double		y;
 	double		z;
-	double		w;
-}				t_vector_3;
+}				t_vector;
 
-double			ft_norm(t_vector_3 v);
-double			ft_length(t_vector_3 v);
-double			ft_dot(t_vector_3 a, t_vector_3 b);
-t_vector_3		ft_normalize(void);
-t_vector_3		ft_cross(t_vector_3 a, t_vector_3 b);
-t_vector_3		ft_add(t_vector_3 a, t_vector_3 b);
-t_vector_3		ft_sub(t_vector_3 a, t_vector_3 b);
-t_vector_3		ft_mult(t_vector_3 v, double r);
+typedef struct	s_vector_dir
+{
+	t_vector	x;
+	t_vector	y;
+	t_vector	z;
+}				t_vector_dir;
+
+t_vector_dir	ft_new_vector_dir(void);
+t_vector_dir	ft_set_vector_dir(t_vector x, t_vector y, t_vector z);
+
+t_vector		ft_set_vector(double x, double y, double z);
+
+double			ft_get_vector_x(t_vector v);
+double			ft_get_vector_y(t_vector v);
+double			ft_get_vector_z(t_vector v);
+
+double			ft_norm(t_vector v);
+double			ft_length(t_vector v);
+double			ft_dot(t_vector a, t_vector b);
+t_vector		ft_normalize(void);
+t_vector		ft_cross(t_vector a, t_vector b);
+t_vector		ft_add(t_vector a, t_vector b);
+t_vector		ft_sub(t_vector a, t_vector b);
+t_vector		ft_mult(t_vector v, double r);
 #endif

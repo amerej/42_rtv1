@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 17:37:31 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/04 12:56:20 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/04 17:26:54 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "camera.h"
 # include "light.h"
 # include "object.h"
+# include "ray.h"
 
 typedef struct		s_scene
 {
@@ -56,6 +57,6 @@ int					ft_parse_window(t_scene *scene, char *line);
 int					ft_parse_camera(t_camera *scene, char *line);
 int					ft_parse_light(t_list **light, char *line);
 int					ft_parse_object(t_list **object, char *line);
-void				ft_set_vector_3(t_vector_3 *v, char *line);
+void				ft_init_vector(t_vector *v, char *line);
 char				*ft_get_value(char *line);
 #endif

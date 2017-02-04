@@ -6,13 +6,13 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 09:21:33 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/04 12:43:29 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/04 17:43:30 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static void		ft_put_pixel_img(t_app *app, t_vector_3 *p, int color)
+static void		ft_put_pixel_img(t_app *app, t_vector *p, int color)
 {
 	int	i;
 
@@ -24,18 +24,24 @@ static void		ft_put_pixel_img(t_app *app, t_vector_3 *p, int color)
 
 static void		ft_draw_img(t_app *app)
 {
-	t_vector_3	p;
+	t_camera		*cam;
+	t_vector		point;
+	t_vector_dir	v_dir;
 
-	p.y = 0;
-	while (p.y < app->scene->height)
+	cam = app->scene->camera;
+	v_dir = (t_vector_dir){{1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
+	cam->look_at = (t_vector){0.0, 0.0, 0.0};
+
+	point.y = 0.0;
+	while (point.y < app->scene->height)
 	{
-		p.x = 0;
-		while (p.x < app->scene->width)
+		point.x = 0.0;
+		while (point.x < app->scene->width)
 		{
-			ft_put_pixel_img(app, &p, 0x00ffff00);
-			++p.x;
+			ft_put_pixel_img(app, &point, 0x00ffff00);
+			++point.x;
 		}
-		++p.y;
+		++point.y;
 	}
 }
 

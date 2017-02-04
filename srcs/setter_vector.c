@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_op2.c                                       :+:      :+:    :+:   */
+/*   setter_vector.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/03 08:51:41 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/04 15:48:13 by aditsch          ###   ########.fr       */
+/*   Created: 2017/02/04 16:20:47 by aditsch           #+#    #+#             */
+/*   Updated: 2017/02/04 17:35:50 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
 #include "vector.h"
 
-t_vector	ft_negative(t_vector v)
+t_vector_dir	ft_set_vector_dir(t_vector x, t_vector y, t_vector z)
 {
-	return ((t_vector){-v.x, -v.y, -v.z});
+	return ((t_vector_dir){x, y, z});
 }
 
-t_vector	ft_add(t_vector a, t_vector b)
+t_vector		ft_set_vector(double x, double y, double z)
 {
-	return ((t_vector){a.x + b.x, a.y + b.y, a.z + b.z});
-}
-
-t_vector	ft_sub(t_vector a, t_vector b)
-{
-	return ((t_vector){a.x - b.x, a.y - b.y, a.z - b.z});
-}
-
-t_vector	ft_mult(t_vector v, double r)
-{
-	return ((t_vector){v.x * r, v.y * r, v.z * r});
+	return ((t_vector){x, y, z});
 }
