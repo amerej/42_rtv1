@@ -6,36 +6,62 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 09:21:33 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/04 19:18:02 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/06 17:23:55 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+#include "ray.h"
 
-static void		ft_put_pixel_img(t_app *app, t_vector *p, int color)
+static void		ft_put_pixel_img(t_app *app, t_vector point, t_vector color)
 {
 	int	i;
 
-	i = ((int)p->x * 4) + ((int)p->y * app->scene->image->size_line);
-	app->scene->image->data[i] = color;
-	app->scene->image->data[++i] = color >> 8;
-	app->scene->image->data[++i] = color >> 16;
+	i = ((int)point.x * 4) + (((int)(app->scene->height - 1) - ((int)point.y)) * app->scene->image->size_line);
+	app->scene->image->data[i] = (int)(255.99 * color.z);
+	app->scene->image->data[++i] = (int)(255.99 * color.y);
+	app->scene->image->data[++i] = (int)(255.99 * color.x);
+}
+
+t_vector	ft_color(t_ray ray)
+{
+	double		t;
+	t_vector	unit_direction;
+
+	unit_direction = ft_unit_vector(ray.direction);
+	t = 0.5 * (unit_direction.y + 1.0);
+	return (ft_add(
+		ft_mult((t_vector){1.0, 1.0, 1.0}, 1.0 - t), ft_mult((t_vector){0.5, 0.7, 1.0}, t)));
 }
 
 static void		ft_draw_img(t_app *app)
 {
-	t_vector		point;
-	t_camera		*cam;
+	t_vector	point;
+	t_vector	lower_left_corner;
+	t_vector	horizontal;
+	t_vector	vertical;
+	t_vector	origin;
+	t_ray		ray;
+	double		u;
+	double		v;
 
-	cam = app->scene->camera;
-	ft_set_camera(cam);
+	lower_left_corner = (t_vector){-2.0, -1.0, -1.0};
+	horizontal = (t_vector){4.0, 0.0, 0.0};
+	vertical = (t_vector){0.0, 2.0, 0.0};
+	origin = (t_vector){0.0, 0.0, 0.0};
+
 	point.y = 0.0;
 	while (point.y < app->scene->height)
 	{
 		point.x = 0.0;
 		while (point.x < app->scene->width)
 		{
-			ft_put_pixel_img(app, &point, 0x00ffff00);
+			u = point.x / app->scene->width;
+			v = point.y / app->scene->height;
+			ray = ft_set_ray(origin,
+				ft_add(ft_add(lower_left_corner,
+					ft_mult(horizontal, u)), ft_mult(vertical, v)));
+			ft_put_pixel_img(app, point, ft_color(ray));
 			++point.x;
 		}
 		++point.y;

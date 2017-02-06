@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 10:49:00 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/04 17:11:58 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/06 14:56:05 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ typedef struct	s_ray
 	t_vector	direction;
 }				t_ray;
 
-t_vector_dir	ft_new_ray(void);
-
-double			ft_get_ray_x(t_vector v);
-double			ft_get_ray_y(t_vector v);
-double			ft_get_ray_z(t_vector v);
+t_ray			ft_set_ray(t_vector origin, t_vector direction);
+t_vector		ft_point_at_parameter(t_ray *ray, double t);
+t_vector		ft_get_origin(t_ray *ray);
+t_vector		ft_get_direction(t_ray *ray);
 #endif
