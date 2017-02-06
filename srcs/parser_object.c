@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 22:59:18 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/04 17:27:50 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/06 18:24:56 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int		ft_parse_sphere(t_list **obj, char **tab_str)
 	if (ft_tabstrlen(tab_str) == 4)
 	{
 		sphere = (t_sphere *)malloc(sizeof(t_sphere));
+		sphere->type = ft_strdup("sphere");
 		ft_init_vector(&sphere->position, tab_str[0]);
 		ft_init_vector(&sphere->rotation, tab_str[1]);
 		sphere->radius = atof(tab_str[2]);
@@ -37,6 +38,7 @@ int		ft_parse_plane(t_list **obj, char **tab_str)
 	if (ft_tabstrlen(tab_str) == 3)
 	{
 		plane = (t_plane *)malloc(sizeof(t_plane));
+		plane->type = ft_strdup("plane");
 		ft_init_vector(&plane->position, tab_str[0]);
 		ft_init_vector(&plane->rotation, tab_str[1]);
 		plane->color = ft_atoi_base(tab_str[2], 16);

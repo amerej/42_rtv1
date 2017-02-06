@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 09:21:33 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/06 17:23:55 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/06 19:03:35 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,29 @@ static void		ft_put_pixel_img(t_app *app, t_vector point, t_vector color)
 	app->scene->image->data[++i] = (int)(255.99 * color.x);
 }
 
+int			ft_hit_sphere(t_vector center, double radius, t_ray ray)
+{
+	t_vector	oc;
+	double		a;
+	double		b;
+	double		c;
+	double		discriminant;
+
+	oc = ft_sub(ray.origin, center);
+	a = ft_dot(ray.direction, ray.direction);
+	b = 2.0 * ft_dot(oc, ray.direction);
+	c = ft_dot(oc, oc) - radius * radius;
+	discriminant = b * b - 4 * a * c;
+	return (discriminant > 0);
+}
+
 t_vector	ft_color(t_ray ray)
 {
 	double		t;
 	t_vector	unit_direction;
 
+	if (ft_hit_sphere((t_vector){0.0, 0.0, -1.0}, 0.5, ray))
+		return ((t_vector){1.0, 0.0, 0.0});
 	unit_direction = ft_unit_vector(ray.direction);
 	t = 0.5 * (unit_direction.y + 1.0);
 	return (ft_add(

@@ -1,5 +1,5 @@
 # Window: Width, Height
-Window: 400, 200
+Window: 800, 400
 
 # Camera: Position, Direction
 Camera: 0.0 0.0 0.0, 0.0 0.0 1.0
