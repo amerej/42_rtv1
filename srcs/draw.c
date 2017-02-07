@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 09:21:33 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/06 19:03:35 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/07 16:42:08 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void		ft_put_pixel_img(t_app *app, t_vector point, t_vector color)
 	app->scene->image->data[++i] = (int)(255.99 * color.x);
 }
 
-int			ft_hit_sphere(t_vector center, double radius, t_ray ray)
+double		ft_hit_sphere(t_vector center, double radius, t_ray ray)
 {
 	t_vector	oc;
 	double		a;
@@ -36,20 +36,29 @@ int			ft_hit_sphere(t_vector center, double radius, t_ray ray)
 	b = 2.0 * ft_dot(oc, ray.direction);
 	c = ft_dot(oc, oc) - radius * radius;
 	discriminant = b * b - 4 * a * c;
-	return (discriminant > 0);
+	if (discriminant < 0)
+		return (-1.0);
+	else
+		return ((-b - sqrt(discriminant)) / (2.0 * a));
 }
 
-t_vector	ft_color(t_ray ray)
+t_vector	ft_color(t_app *app, t_ray ray)
 {
 	double		t;
 	t_vector	unit_direction;
-
-	if (ft_hit_sphere((t_vector){0.0, 0.0, -1.0}, 0.5, ray))
-		return ((t_vector){1.0, 0.0, 0.0});
+	t_vector	n;
+	t = ft_hit_sphere((t_vector){0.0, 0.0, -1.0}, 0.5, ray);
+	if (t > 0.0)
+	{
+		n = ft_unit_vector(ft_sub(ft_point_at_parameter(&ray, t),
+			(t_vector){0.0, 0.0, -1.0}));
+		return ((t_vector){0.5 * (n.x + 1), 0.5 * (n.y + 1), 0.5 * (n.z + 1)});
+	}
 	unit_direction = ft_unit_vector(ray.direction);
 	t = 0.5 * (unit_direction.y + 1.0);
 	return (ft_add(
-		ft_mult((t_vector){1.0, 1.0, 1.0}, 1.0 - t), ft_mult((t_vector){0.5, 0.7, 1.0}, t)));
+		ft_mult((t_vector){1.0, 1.0, 1.0}, 1.0 - t),
+		ft_mult((t_vector){0.5, 0.7, 1.0}, t)));
 }
 
 static void		ft_draw_img(t_app *app)
@@ -79,7 +88,7 @@ static void		ft_draw_img(t_app *app)
 			ray = ft_set_ray(origin,
 				ft_add(ft_add(lower_left_corner,
 					ft_mult(horizontal, u)), ft_mult(vertical, v)));
-			ft_put_pixel_img(app, point, ft_color(ray));
+			ft_put_pixel_img(app, point, ft_color(app, ray));
 			++point.x;
 		}
 		++point.y;

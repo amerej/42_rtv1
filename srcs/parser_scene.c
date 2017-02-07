@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 12:04:43 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/06 18:14:48 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/07 15:44:16 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void		ft_set_scene(t_scene *scene, char *line, t_section *section)
 	else if (*section == LIGHT)
 		ft_parse_light(&scene->light, line);
 	else if (*section == SPHERE)
-		ft_parse_object(&scene->object, line);
+		ft_parse_object(scene->object, line);
 	else if (*section == PLANE)
-		ft_parse_object(&scene->object, line);
+		ft_parse_object(scene->object, line);
 }
 
 void		ft_get_section_object(char *line, t_section *section)

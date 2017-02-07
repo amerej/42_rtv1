@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 17:37:31 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/06 18:14:43 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/07 15:44:19 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,13 @@
 # include "object.h"
 # include "ray.h"
 
-typedef struct		s_color
-{
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-}					t_color;
-
 typedef struct		s_scene
 {
 	int				width;
 	int				height;
 	t_camera		*camera;
 	t_image			*image;
-	t_list			*object;
+	t_object		*object;
 	t_list			*light;
 }					t_scene;
 
@@ -63,7 +56,7 @@ int					ft_parse_scene(t_scene *scene, int fd);
 int					ft_parse_window(t_scene *scene, char *line);
 int					ft_parse_camera(t_camera *scene, char *line);
 int					ft_parse_light(t_list **light, char *line);
-int					ft_parse_object(t_list **object, char *line);
+int					ft_parse_object(t_object *object, char *line);
 void				ft_init_vector(t_vector *v, char *line);
 char				*ft_get_value(char *line);
 #endif

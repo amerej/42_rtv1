@@ -8,7 +8,7 @@ Camera: 0.0 0.0 0.0, 0.0 0.0 1.0
 Light: 0.0 0.0 0.0, 1.0
 
 # Sphere: Position, Rotation, Radius, Color
-Sphere: 20.0 0.0 0.0, 0.0 0.0 0.0, 10.0, 1E8BC3
+Sphere: 0.0 0.0 -1.0, 0.0 0.0 0.0, 10.0, 1E8BC3
 
 # Plane: Position, Rotation, Color
 Plane: 20.0 0.0 0.0, 19.0 0.0 0.0, 1E8BC3
