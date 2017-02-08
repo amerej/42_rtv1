@@ -6,24 +6,22 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 12:04:43 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/07 15:44:16 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/08 15:01:46 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void		ft_set_scene(t_scene *scene, char *line, t_section *section)
+void		ft_set_scene(t_scene *sc, char *line, t_section *section)
 {
-	if (*section == WINDOW)
-		ft_parse_window(scene, line);
+	if (*section == RENDER)
+		ft_parse_render(sc, line);
 	else if (*section == CAMERA)
-		ft_parse_camera(scene->camera, line);
+		ft_parse_camera(sc->cam, line);
 	else if (*section == LIGHT)
-		ft_parse_light(&scene->light, line);
-	else if (*section == SPHERE)
-		ft_parse_object(scene->object, line);
-	else if (*section == PLANE)
-		ft_parse_object(scene->object, line);
+		ft_parse_light(&sc->lights, line);
+	else if (*section == SPHERE || *section == PLANE)
+		ft_parse_object(&sc->objects, line);
 }
 
 void		ft_get_section_object(char *line, t_section *section)
@@ -34,15 +32,15 @@ void		ft_get_section_object(char *line, t_section *section)
 		*section = PLANE;
 }
 
-int			ft_parse_scene(t_scene *scene, int fd)
+int			ft_parse_scene(t_scene *sc, int fd)
 {
 	char		*line;
 	t_section	section;
 
 	while (ft_get_next_line(fd, &line))
 	{
-		if (!ft_strncmp(line, "Window:", 7))
-			section = WINDOW;
+		if (!ft_strncmp(line, "Render:", 7))
+			section = RENDER;
 		else if (!ft_strncmp(line, "Camera:", 7))
 			section = CAMERA;
 		else if (!ft_strncmp(line, "Light:", 6))
@@ -50,7 +48,7 @@ int			ft_parse_scene(t_scene *scene, int fd)
 		else
 			section = NONE;
 		ft_get_section_object(line, &section);
-		ft_set_scene(scene, line, &section);
+		ft_set_scene(sc, line, &section);
 		ft_free_ptr((void **)&line);
 	}
 	ft_free_ptr((void **)&line);

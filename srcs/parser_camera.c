@@ -6,13 +6,13 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 19:25:24 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/04 19:13:16 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/08 16:47:06 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int		ft_parse_camera(t_camera *camera, char *line)
+int		ft_parse_camera(t_cam *cam, char *line)
 {
 	char	*str;
 	char	**tab_str;
@@ -22,8 +22,8 @@ int		ft_parse_camera(t_camera *camera, char *line)
 	tab_str = ft_strsplit(str, ',');
 	if (ft_tabstrlen(tab_str) == 2)
 	{
-		ft_init_vector(&camera->position, tab_str[0]);
-		ft_init_vector(&camera->direction, tab_str[1]);
+		ft_init_vector(&cam->pos, tab_str[0]);
+		ft_init_vector(&cam->dir, tab_str[1]);
 		ft_free_tabstr(tab_str);
 		ft_free_ptr((void **)&str);
 		return (TRUE);

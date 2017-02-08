@@ -1,17 +1,17 @@
-# Window: Width, Height
-Window: 800, 400
+# Render: Width, Height
+Render: 800, 400
 
 # Camera: Position, Direction
-Camera: 0.0 0.0 0.0, 0.0 0.0 1.0
-
-# Light: Position, Intensity
-Light: 0.0 0.0 0.0, 1.0
+Camera: 0.0 0.0 0.0, 0.0 0.0 0.0
 
 # Sphere: Position, Rotation, Radius, Color
-Sphere: 0.0 0.0 -1.0, 0.0 0.0 0.0, 10.0, 1E8BC3
+Sphere: 0.0 0.0 0.0, 0.0 0.0 0.0, 0.0, 3498db
+Sphere: 0.0 0.0 0.0, 0.0 0.0 0.0, 0.0, 2ecc71
 
 # Plane: Position, Rotation, Color
-Plane: 20.0 0.0 0.0, 19.0 0.0 0.0, 1E8BC3
+Plane: 0.0 0.0 0.0, 0.0 0.0 0.0, e74c3c
+Plane: 0.0 0.0 0.0, 0.0 0.0 0.0, 95a5a6
 
 # Light: Position, Intensity
-Light: 15.0 80.0 0.0, 0.9
+Light: 0.0 0.0 0.0, 0.0
+Light: 0.0 0.0 0.0, 0.0

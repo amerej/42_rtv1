@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_window.c                                    :+:      :+:    :+:   */
+/*   parser_render.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 18:33:49 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/07 16:03:40 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/08 14:53:25 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int		ft_parse_window(t_scene *scene, char *line)
+int		ft_parse_render(t_scene *sc, char *line)
 {
 	char	*str;
 	char	**tab_str;
@@ -22,8 +22,8 @@ int		ft_parse_window(t_scene *scene, char *line)
 	tab_str = ft_strsplit(str, ',');
 	if (ft_tabstrlen(tab_str) == 2)
 	{
-		scene->width = ft_atoi(tab_str[0]);
-		scene->height = ft_atoi(tab_str[1]);
+		sc->width = ft_atoi(tab_str[0]);
+		sc->height = ft_atoi(tab_str[1]);
 		ft_free_tabstr(tab_str);
 		ft_free_ptr((void **)&str);
 		return (TRUE);

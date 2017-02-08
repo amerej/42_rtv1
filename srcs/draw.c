@@ -6,21 +6,21 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 09:21:33 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/07 16:42:08 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/08 20:28:43 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "ray.h"
 
-static void		ft_put_pixel_img(t_app *app, t_vector point, t_vector color)
+static void		ft_put_pixel_img(t_scene *sc, t_point_i p, t_color color)
 {
 	int	i;
 
-	i = ((int)point.x * 4) + (((int)(app->scene->height - 1) - ((int)point.y)) * app->scene->image->size_line);
-	app->scene->image->data[i] = (int)(255.99 * color.z);
-	app->scene->image->data[++i] = (int)(255.99 * color.y);
-	app->scene->image->data[++i] = (int)(255.99 * color.x);
+	i = p.x * 4 + p.y * sc->img->size_line;
+	sc->img->data[i] = (unsigned char)(255 * color.r);
+	sc->img->data[++i] = (unsigned char)(255 * color.g);
+	sc->img->data[++i] = (unsigned char)(255 * color.b);
 }
 
 double		ft_hit_sphere(t_vector center, double radius, t_ray ray)
@@ -42,7 +42,7 @@ double		ft_hit_sphere(t_vector center, double radius, t_ray ray)
 		return ((-b - sqrt(discriminant)) / (2.0 * a));
 }
 
-t_vector	ft_color(t_app *app, t_ray ray)
+t_vector	ft_ray_trace(t_scene *sc, t_ray ray)
 {
 	double		t;
 	t_vector	unit_direction;
@@ -56,55 +56,42 @@ t_vector	ft_color(t_app *app, t_ray ray)
 	}
 	unit_direction = ft_unit_vector(ray.direction);
 	t = 0.5 * (unit_direction.y + 1.0);
-	return (ft_add(
-		ft_mult((t_vector){1.0, 1.0, 1.0}, 1.0 - t),
-		ft_mult((t_vector){0.5, 0.7, 1.0}, t)));
+	// return (ft_add(
+	// 	ft_mult((t_vector){1.0, 1.0, 1.0}, 1.0 - t),
+	// 	ft_mult((t_vector){0.5, 0.7, 1.0}, t)));
+	return((t_vector){0.0, 0.0, 0.0});
 }
 
-static void		ft_draw_img(t_app *app)
+static void		ft_draw_img(t_scene *sc)
 {
-	t_vector	point;
-	t_vector	lower_left_corner;
-	t_vector	horizontal;
-	t_vector	vertical;
-	t_vector	origin;
 	t_ray		ray;
-	double		u;
-	double		v;
+	t_vector	vec_dir;
+	int			color;
+	t_point_i	p;
 
-	lower_left_corner = (t_vector){-2.0, -1.0, -1.0};
-	horizontal = (t_vector){4.0, 0.0, 0.0};
-	vertical = (t_vector){0.0, 2.0, 0.0};
-	origin = (t_vector){0.0, 0.0, 0.0};
-
-	point.y = 0.0;
-	while (point.y < app->scene->height)
+	p.y = 0;
+	while (point.y < sc->height)
 	{
-		point.x = 0.0;
-		while (point.x < app->scene->width)
+		p.x = 0;
+		while (point.x < sc->width)
 		{
-			u = point.x / app->scene->width;
-			v = point.y / app->scene->height;
-			ray = ft_set_ray(origin,
-				ft_add(ft_add(lower_left_corner,
-					ft_mult(horizontal, u)), ft_mult(vertical, v)));
-			ft_put_pixel_img(app, point, ft_color(app, ray));
+			ray->origin = sc->cam->pos;
+			vec_dir = ft_get_cam_dir(sc->cam, p.x, p.y, sc->width, sc->height);
+			ft_normalize(&vec_dir);
+			ray->dir = vec_dir;
+			ft_put_pixel_img(sc, point, ft_ray_trace(sc, ray));
 			++point.x;
 		}
 		++point.y;
 	}
 }
 
-void	ft_draw_window(t_app *app)
+void	ft_draw_window(t_scene *sc)
 {
-	app->scene->image->img_ptr = mlx_new_image(app->mlx,
-		app->scene->width, app->scene->height);
-	app->scene->image->data = mlx_get_data_addr(app->scene->image->img_ptr,
-		&(app->scene->image->bpp),
-		&(app->scene->image->size_line),
-		&(app->scene->image->endian));
-	ft_draw_img(app);
-	mlx_put_image_to_window(app->mlx, app->win,
-		app->scene->image->img_ptr, 0, 0);
-	mlx_destroy_image(app->mlx, app->scene->image->img_ptr);
+	sc->img->img_ptr = mlx_new_image(sc->mlx, sc->width, sc->height);
+	sc->img->data = mlx_get_data_addr(sc->img->img_ptr,
+		&(sc->img->bpp), &(sc->img->size_line), &(sc->img->endian));
+	ft_draw_img(sc);
+	mlx_put_image_to_window(sc->mlx, sc->win, sc->img->img_ptr, 0, 0);
+	mlx_destroy_image(sc->mlx, sc->img->img_ptr);
 }

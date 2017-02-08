@@ -6,13 +6,13 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 22:59:18 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/04 17:27:20 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/08 15:00:39 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int		ft_parse_light(t_list **light_list, char *line)
+int		ft_parse_light(t_list **lights, char *line)
 {
 	char		*str;
 	char		**tab_str;
@@ -25,12 +25,11 @@ int		ft_parse_light(t_list **light_list, char *line)
 	if (ft_tabstrlen(tab_str) == 2)
 	{
 		light = (t_light *)malloc(sizeof(t_light));
-		light->id = id++;
 		ft_init_vector(&light->position, tab_str[0]);
 		light->intensity = atof(tab_str[1]);
 		ft_free_tabstr(tab_str);
 		ft_free_ptr((void **)&str);
-		ft_list_push_back(light_list, ft_list_new(light, sizeof(t_light)));
+		ft_list_push_back(lights, ft_list_new(light, sizeof(t_light)));
 		ft_free_ptr((void **)&light);
 		return (TRUE);
 	}
