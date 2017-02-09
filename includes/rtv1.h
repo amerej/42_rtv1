@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 17:37:31 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/09 14:43:41 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/09 18:52:57 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,6 @@
 # include "ray.h"
 # include "color.h"
 # include "limits.h"
-
-typedef struct		s_point_i
-{
-	int				x;
-	int				y;
-}					t_point_i;
-
-typedef struct		s_point_d
-{
-	double			x;
-	double			y;
-}					t_point_d;
 
 typedef struct		s_scene
 {

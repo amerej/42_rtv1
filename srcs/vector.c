@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 16:20:47 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/08 21:20:37 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/09 18:41:10 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,9 @@ t_vector	ft_sub(t_vector a, t_vector b)
 t_vector	ft_mult(t_vector v, double r)
 {
 	return ((t_vector){v.x * r, v.y * r, v.z * r});
+}
+
+t_vector	ft_div(t_vector v, double r)
+{
+	return ((t_vector){v.x / r, v.y / r, v.z / r});
 }

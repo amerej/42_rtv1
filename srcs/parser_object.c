@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 22:59:18 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/09 15:57:35 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/09 22:19:49 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ int		ft_parse_sphere(t_list	**objects, char **tab_str, t_section type, int id)
 {
 	t_object	*obj;
 
-	if (ft_tabstrlen(tab_str) == 4)
+	if (ft_tabstrlen(tab_str) == 3)
 	{
 		obj = (t_object *)malloc(sizeof(t_object));
 		obj->id = ++id;
 		obj->type = type;
-		ft_init_vector(&sphere->pos, tab_str[0]);
+		ft_init_vector(&obj->pos, tab_str[0]);
 		obj->radius = atof(tab_str[1]);
 		obj->color = ft_atoi_base(tab_str[2], 16);
 		ft_list_push_back(objects, ft_list_new(obj, sizeof(t_object)));

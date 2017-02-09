@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object.h                                           :+:      :+:    :+:   */
+/*   common.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/04 11:19:49 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/09 18:51:17 by aditsch          ###   ########.fr       */
+/*   Created: 2017/02/09 18:52:34 by aditsch           #+#    #+#             */
+/*   Updated: 2017/02/09 18:53:09 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJECT_H
- #define OBJECT_H
+#ifndef COMMON_H
+# define COMMON_H
 
-# include "../libft/libft.h"
-# include "vector.h"
-# include "parser.h"
-# include "intersect.h"
-
-typedef	struct		s_object
+typedef struct		s_point_i
 {
-	int					id;
-	t_section			type;
-	t_vector			pos;
-	t_vector			rot;
-	double				radius;
-	int					color;
-	t_intersect_data	inter_data;
-	double				b;
-	double				c;
-	double				delta;
-	double				t;
-	double				t1;
-	double				t2;
-	t_vector			oc;
-}						t_object;
+	int				x;
+	int				y;
+}					t_point_i;
+
+typedef struct		s_point_d
+{
+	double			x;
+	double			y;
+}					t_point_d;
 #endif

@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 19:25:24 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/08 16:47:06 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/09 22:38:16 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		ft_parse_camera(t_cam *cam, char *line)
 	if (ft_tabstrlen(tab_str) == 2)
 	{
 		ft_init_vector(&cam->pos, tab_str[0]);
-		ft_init_vector(&cam->dir, tab_str[1]);
+		ft_init_vector(&cam->look_at, tab_str[1]);
 		ft_free_tabstr(tab_str);
 		ft_free_ptr((void **)&str);
 		return (TRUE);
