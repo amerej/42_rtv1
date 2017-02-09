@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object.h                                           :+:      :+:    :+:   */
+/*   intersect.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/04 11:19:49 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/09 17:46:33 by aditsch          ###   ########.fr       */
+/*   Created: 2017/02/09 13:52:37 by aditsch           #+#    #+#             */
+/*   Updated: 2017/02/09 17:11:08 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJECT_H
- #define OBJECT_H
+#ifndef INTERSECT_H
+# define INTERSECT_H
 
-# include "../libft/libft.h"
 # include "vector.h"
-# include "parser.h"
+# include "object.h"
 
-typedef	struct		s_object
+typedef struct		s_intersect_data
 {
-	int					id;
-	t_section			type;
-	t_vector			pos;
-	t_vector			rot;
-	double				radius;
-	int					color;
-	t_intersect_data	inter_data;
-	double				b;
-	double				c;
-	double				delta;
-	double				t;
-	double				t1;
-	double				t2;
-	t_vector			oc;
-}						t_object;
+	t_vector		inter;
+	t_vector		normal;
+}					t_intersect_data;
 #endif

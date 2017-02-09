@@ -6,67 +6,108 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 09:21:33 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/08 20:28:43 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/09 18:09:08 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "ray.h"
+#include "intersect.h"
 
 static void		ft_put_pixel_img(t_scene *sc, t_point_i p, t_color color)
 {
 	int	i;
 
 	i = p.x * 4 + p.y * sc->img->size_line;
-	sc->img->data[i] = (unsigned char)(255 * color.r);
-	sc->img->data[++i] = (unsigned char)(255 * color.g);
-	sc->img->data[++i] = (unsigned char)(255 * color.b);
+	sc->img->data[i] = (unsigned char)(255 * (int)color.r);
+	sc->img->data[++i] = (unsigned char)(255 * (int)color.g);
+	sc->img->data[++i] = (unsigned char)(255 * (int)color.b);
 }
 
-double		ft_hit_sphere(t_vector center, double radius, t_ray ray)
+double		ft_hit_sphere(t_ray ray, t_object *sphere)
 {
-	t_vector	oc;
-	double		a;
-	double		b;
-	double		c;
-	double		discriminant;
-
-	oc = ft_sub(ray.origin, center);
-	a = ft_dot(ray.direction, ray.direction);
-	b = 2.0 * ft_dot(oc, ray.direction);
-	c = ft_dot(oc, oc) - radius * radius;
-	discriminant = b * b - 4 * a * c;
-	if (discriminant < 0)
-		return (-1.0);
-	else
-		return ((-b - sqrt(discriminant)) / (2.0 * a));
-}
-
-t_vector	ft_ray_trace(t_scene *sc, t_ray ray)
-{
-	double		t;
-	t_vector	unit_direction;
-	t_vector	n;
-	t = ft_hit_sphere((t_vector){0.0, 0.0, -1.0}, 0.5, ray);
-	if (t > 0.0)
+	obj->oc = ft_sub(ray.origin, obj->pos);
+	obj->b = ft_dot(obj->oc, ray.dir);
+	obj->c = ft_squared_length(obj->oc) - obj->radius * obj->radius;
+	obj->delta = ((b * b) - c);
+	if (obj->delta >= 0)
 	{
-		n = ft_unit_vector(ft_sub(ft_point_at_parameter(&ray, t),
-			(t_vector){0.0, 0.0, -1.0}));
-		return ((t_vector){0.5 * (n.x + 1), 0.5 * (n.y + 1), 0.5 * (n.z + 1)});
+		if (obj->delta != 0)
+		{
+			obj->delta = (float)sqrt(obj->delta);
+			obj->t1 = (-obj->b + obj->delta); if (obj->t1<0) return false;
+			obj->t2 = (-obj->b - obj->delta); if (obj->t2<0) return false;
+
+			if (t1<t2)
+				t = t1;
+			else
+				t = t2;
+		}
+
+		else
+			t = (-b);
+		}
 	}
-	unit_direction = ft_unit_vector(ray.direction);
-	t = 0.5 * (unit_direction.y + 1.0);
-	// return (ft_add(
-	// 	ft_mult((t_vector){1.0, 1.0, 1.0}, 1.0 - t),
-	// 	ft_mult((t_vector){0.5, 0.7, 1.0}, t)));
-	return((t_vector){0.0, 0.0, 0.0});
+
+
+}
+
+int			ft_hit_object(t_ray *ray, t_object *obj)
+{
+	if (obj->type == SPHERE)
+	{
+		ft_hit_sphere(ray, obj);
+		return (TRUE);
+	}
+	// else if (obj->type == PLANE)
+	// {
+	// 	ft_hit_plane(ray, obj);
+	// 	return (TRUE);
+	// }
+	return (FALSE);
+}
+
+t_object	ft_get_closest_object(t_ray ray, t_list *objects)
+{
+	t_object	*cur_obj;
+	t_object	*obj;
+	double		dist;
+	double		tmp_dist;
+
+	dist = MAX_DOUBLE;
+	obj = NULL;
+	while (objects)
+	{
+		cur_obj = ((t_object *)objects)->content;
+		if (ft_hit_object(ray, cur_obj))
+			tmp_dist = ft_squared_length(ft_sub(cur_obj->inter_data.inter, ray.origin));
+			if (tmp_dist < dist)
+			{
+				dist = tmp_dist;
+				obj = cur_obj;
+			}
+		objects = objects->next;
+	}
+	return (obj);
+}
+
+t_color		ft_ray_trace(t_scene *sc, t_ray ray)
+{
+	t_object			obj;
+	t_color				color;
+
+	color = (t_color){0.0, 0.0, 0.0};
+	if ((obj = ft_get_closest_object(ray, sc->objects)))
+	{
+		// Parcours des lumieres
+	}
+
 }
 
 static void		ft_draw_img(t_scene *sc)
 {
 	t_ray		ray;
 	t_vector	vec_dir;
-	int			color;
 	t_point_i	p;
 
 	p.y = 0;

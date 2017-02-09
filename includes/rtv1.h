@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 17:37:31 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/08 20:21:15 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/09 14:43:41 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "object.h"
 # include "ray.h"
 # include "color.h"
+# include "limits.h"
 
 typedef struct		s_point_i
 {

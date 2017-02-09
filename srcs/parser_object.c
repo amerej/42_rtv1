@@ -6,44 +6,45 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 22:59:18 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/08 15:20:40 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/09 15:57:35 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int		ft_parse_sphere(t_list	**objects, char **tab_str, t_section type)
+int		ft_parse_sphere(t_list	**objects, char **tab_str, t_section type, int id)
 {
-	t_sphere	*sphere;
+	t_object	*obj;
 
 	if (ft_tabstrlen(tab_str) == 4)
 	{
-		sphere = (t_sphere *)malloc(sizeof(t_sphere));
-		sphere->type = type;
-		ft_init_vector(&sphere->position, tab_str[0]);
-		ft_init_vector(&sphere->rotation, tab_str[1]);
-		sphere->radius = atof(tab_str[2]);
-		sphere->color = ft_atoi_base(tab_str[3], 16);
-		ft_list_push_back(objects, ft_list_new(sphere, sizeof(t_sphere)));
-		ft_free_ptr((void **)&sphere);
+		obj = (t_object *)malloc(sizeof(t_object));
+		obj->id = ++id;
+		obj->type = type;
+		ft_init_vector(&sphere->pos, tab_str[0]);
+		obj->radius = atof(tab_str[1]);
+		obj->color = ft_atoi_base(tab_str[2], 16);
+		ft_list_push_back(objects, ft_list_new(obj, sizeof(t_object)));
+		ft_free_ptr((void **)&obj);
 		return (TRUE);
 	}
 	return (FALSE);
 }
 
-int		ft_parse_plane(t_list **objects, char **tab_str, t_section type)
+int		ft_parse_plane(t_list **objects, char **tab_str, t_section type, int id)
 {
-	t_plane		*plane;
+	t_object	*obj;
 
 	if (ft_tabstrlen(tab_str) == 3)
 	{
-		plane = (t_plane *)malloc(sizeof(t_plane));
-		plane->type = type;
-		ft_init_vector(&plane->position, tab_str[0]);
-		ft_init_vector(&plane->rotation, tab_str[1]);
-		plane->color = ft_atoi_base(tab_str[2], 16);
-		ft_list_push_back(objects, ft_list_new(plane, sizeof(t_plane)));
-		ft_free_ptr((void **)&plane);
+		obj = (t_object *)malloc(sizeof(t_object));
+		obj->id = ++id;
+		obj->type = type;
+		ft_init_vector(&obj->pos, tab_str[0]);
+		ft_init_vector(&obj->rot, tab_str[1]);
+		obj->color = ft_atoi_base(tab_str[2], 16);
+		ft_list_push_back(objects, ft_list_new(obj, sizeof(t_object)));
+		ft_free_ptr((void **)&obj);
 		return (TRUE);
 	}
 	return (FALSE);
@@ -51,10 +52,11 @@ int		ft_parse_plane(t_list **objects, char **tab_str, t_section type)
 
 int		ft_parse_object(t_list **objects, char *line)
 {
-	char	*str;
-	char	*type;
-	char	**tab_str;
-	int		ret;
+	char		*str;
+	char		*type;
+	char		**tab_str;
+	int			ret;
+	static int	id = 0;
 
 	type = line;
 	str = ft_strchr(line, ':');
@@ -63,9 +65,9 @@ int		ft_parse_object(t_list **objects, char *line)
 	tab_str = ft_strsplit(str, ',');
 
 	if (!ft_strcmp("Sphere", type))
-		ret = ft_parse_sphere(objects, tab_str, SPHERE);
+		ret = ft_parse_sphere(objects, tab_str, SPHERE, id);
 	if (!ft_strcmp("Plane", type))
-		ret = ft_parse_plane(objects, tab_str, PLANE);
+		ret = ft_parse_plane(objects, tab_str, PLANE, id);
 	ft_free_tabstr(tab_str);
 	ft_free_ptr((void **)&str);
 	ft_free_ptr((void **)&type);
