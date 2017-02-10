@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 11:51:39 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/10 18:39:46 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/10 20:39:17 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct			s_light
 {
 	t_vector			position;
 	t_vector			dir;
+	double				intensity;
 	t_intersect_data	inter_data;
 }						t_light;
 #endif

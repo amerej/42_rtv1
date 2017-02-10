@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 09:21:33 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/10 19:38:34 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/10 20:44:34 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,11 @@ t_color		ft_get_light(t_light *light, t_object *obj)
 	ft_normalize(&v_light);
 	angle = ft_dot(obj->inter_data.normal, ft_negative(v_light));
 	if (angle <= 0)
-		color = (t_color){0.0, 0.0, 0.0};
+		return ((t_color){0.0, 0.0, 0.0});
 	else
-	{
-		color = ft_mult_color(ft_mult_color(obj->color, 1.0), angle);
-		// printf("get_light = %lf, %lf, %lf\n", color.r, color.g, color.b);
-	}
-	return (color);
+		color = obj->color;
+	return (ft_mult_color(ft_mult_color(color, 1.0),
+		angle * light->intensity));
 }
 
 t_color		ft_ray_trace(t_scene *sc, t_ray ray)
@@ -136,15 +134,11 @@ t_color		ft_ray_trace(t_scene *sc, t_ray ray)
 			v_light = ft_sub(light->position, obj->inter_data.inter);
 			light_to_obj_dist = ft_length(v_light);
 			ft_normalize(&v_light);
-			// printf("%lf, %lf, %lf\n", obj->color.r, obj->color.g, obj->color.b);
-			color = ft_get_light(light, obj);
-			// printf("%lf, %lf, %lf\n", color.r, color.g, color.b);
+			color = ft_add_color(ft_get_light(light, obj), color);
 			iter_list = iter_list->next;
 		}
-		color = ft_add_color(obj->color, color);
-		// printf("%lf, %lf, %lf\n", color.r, color.g, color.b);
 	}
-	// ft_normalize_color(&color);
+	ft_normalize_color(&color);
 	return (color);
 }
 
