@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 13:52:37 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/09 18:50:58 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/10 15:42:25 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define INTERSECT_H
 
 # include "vector.h"
-# include "object.h"
 
 typedef struct		s_intersect_data
 {

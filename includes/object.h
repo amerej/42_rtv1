@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 11:19:49 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/09 18:51:17 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/10 18:39:44 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "vector.h"
 # include "parser.h"
 # include "intersect.h"
+# include "color.h"
 
 typedef	struct		s_object
 {
@@ -25,8 +26,9 @@ typedef	struct		s_object
 	t_vector			pos;
 	t_vector			rot;
 	double				radius;
-	int					color;
+	t_color				color;
 	t_intersect_data	inter_data;
+	double				a;
 	double				b;
 	double				c;
 	double				delta;

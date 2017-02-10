@@ -3,6 +3,7 @@ NAME = rtv1
 SRC_PATH = srcs
 
 SRC_NAME =	camera.c\
+			color.c\
 			draw.c\
 			event.c\
 			main.c\

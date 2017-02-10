@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 21:10:39 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/07 23:23:24 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/10 15:55:17 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,22 @@ void		ft_init_vector(t_vector *v, char *str)
 			v->x = atof(tab_str[0]);
 			v->y = atof(tab_str[1]);
 			v->z = atof(tab_str[2]);
+		}
+		ft_free_tabstr(tab_str);
+	}
+}
+
+void		ft_init_color(t_color *c, char *str)
+{
+	char	**tab_str;
+
+	if ((tab_str = ft_strsplit(str, ' ')))
+	{
+		if (ft_tabstrlen(tab_str) == 3)
+		{
+			c->r = atoi(tab_str[0]);
+			c->g = atoi(tab_str[1]);
+			c->b = atoi(tab_str[2]);
 		}
 		ft_free_tabstr(tab_str);
 	}

@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 17:37:31 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/09 18:52:57 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/10 12:06:16 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int					ft_parse_camera(t_cam *cam, char *line);
 int					ft_parse_light(t_list **lights, char *line);
 int					ft_parse_object(t_list **objects, char *line);
 void				ft_init_vector(t_vector *v, char *line);
+void				ft_init_color(t_color *c, char *str);
 char				*ft_get_value(char *line);
 #endif

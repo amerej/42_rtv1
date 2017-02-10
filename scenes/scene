@@ -1,15 +1,14 @@
 # Render: Width, Height
-Render: 1600, 800
+Render: 640, 480
 
 # Camera: Position, LookAt
 Camera: 0.0 3.0 -15.0, 0.0 0.0 10.0
 
-# Sphere: Position, Radius, Color
-Sphere: 0.0 0.0 10.0, 2.0, 3498DB
+# Sphere: Position, Radius, Color 52 152 219
+Sphere: 0.0 0.0 10.0, 2.0, 1.0 1.0 0.0
 
 # Plane: Position, Rotation, Color
 Plane: 0.0 -2.0 0.0, 0.0 1.0 0.0, E74C3C
 
-# Light: Position, Intensity
-Light: 1.0 1.0 1.0, 0.0
-Light: 1.0 1.0 1.0, 0.0
+# Light: Position
+Light: 50.0 -10.0 0.0
