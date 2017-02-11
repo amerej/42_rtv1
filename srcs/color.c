@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 14:43:29 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/10 19:50:16 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/11 05:03:50 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_color	ft_cross_color(t_color c_1, t_color c_2)
 
 t_color	ft_add_color(t_color a, t_color b)
 {
-	return ((t_color){a.r + b.r, a.g + b.g, a.b + b.b});
+	return ((t_color){a.r += b.r, a.g += b.g, a.b += b.b});
 }
 
 void	ft_normalize_color(t_color *c)
