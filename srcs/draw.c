@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 09:21:33 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/10 20:44:34 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/11 04:19:05 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int		ft_hit_sphere(t_ray ray, t_object *obj)
 		else
 			obj->t = (-obj->b);
 		obj->inter_data.inter = ft_add(ray.origin, ft_mult(ray.dir, obj->t));
-		obj->inter_data.normal = ft_div(ft_sub(obj->inter_data.inter, obj->pos), obj->radius);
+		obj->inter_data.normal = ft_div(ft_sub(obj->inter_data.inter,
+			obj->pos), obj->radius);
 		return (TRUE);
 	}
 	return (FALSE);
@@ -123,18 +124,39 @@ t_color		ft_ray_trace(t_scene *sc, t_ray ray)
 	double		light_to_inter_dist;
 	t_ray		light_ray;
 	t_list		*iter_list = sc->lights;
+	t_list		*iter_object = sc->objects;
+	t_object	*cur_obj;
+	int			light_blocked;
 
-	color = (t_color){0.0, 0.0, 0.0};
+	color = (t_color){0., 0., 0.};
 	obj = ft_get_closest_object(ray, sc->objects);
 	if (obj)
 	{
 		while (iter_list)
 		{
-			light = ((t_list *)iter_list)->content;
-			v_light = ft_sub(light->position, obj->inter_data.inter);
+			light_blocked = FALSE;
+			light = (t_light *)iter_list->content;
+			v_light = ft_sub(obj->inter_data.inter, light->position);
 			light_to_obj_dist = ft_length(v_light);
 			ft_normalize(&v_light);
-			color = ft_add_color(ft_get_light(light, obj), color);
+			light_ray.origin = light->position;
+			light_ray.dir = v_light;
+			while (iter_object)
+			{
+				cur_obj = (t_object *)iter_object->content;
+				if (cur_obj->id != obj->id)
+				{
+					if (ft_hit_object(light_ray, cur_obj))
+					{
+						light_to_inter_dist = ft_length(ft_sub(cur_obj->inter_data.inter, light->position));
+						if (light_to_inter_dist < light_to_obj_dist)
+							light_blocked = TRUE;
+					}
+				}
+				iter_object = iter_object->next;
+			}
+			if (!light_blocked)
+				color = ft_add_color(ft_get_light(light, obj), color);
 			iter_list = iter_list->next;
 		}
 	}
