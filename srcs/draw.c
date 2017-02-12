@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 09:21:33 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/11 05:05:00 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/12 17:08:20 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,8 +155,9 @@ t_color		ft_ray_trace(t_scene *sc, t_ray ray)
 				}
 				iter_object = iter_object->next;
 			}
+			iter_object = sc->objects;
 			if (!light_blocked)
-				color = ft_add_color(ft_get_light(light, obj), color);
+				color = ft_add_color(color, ft_get_light(light, obj));
 			iter_list = iter_list->next;
 		}
 	}
