@@ -6,7 +6,9 @@ SRC_NAME =	camera.c\
 			color.c\
 			draw.c\
 			event.c\
+			light.c\
 			main.c\
+			object.c\
 			parser_camera.c\
 			parser_light.c\
 			parser_object.c\
@@ -14,7 +16,8 @@ SRC_NAME =	camera.c\
 			parser_scene.c\
 			parser_toolbox.c\
 			scene.c\
-			vector.c
+			vector_op1.c\
+			vector_op2.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

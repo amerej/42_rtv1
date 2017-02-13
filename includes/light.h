@@ -6,21 +6,32 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 11:51:39 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/10 20:39:17 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/13 20:35:22 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIGHT_H
 # define LIGHT_H
 
+# include "rtv1.h"
+# include "object.h"
 # include "vector.h"
-#include "intersect.h"
+# include "ray.h"
+# include "color.h"
 
-typedef struct			s_light
+typedef struct	s_light
 {
-	t_vector			position;
-	t_vector			dir;
-	double				intensity;
-	t_intersect_data	inter_data;
-}						t_light;
+	t_vector	pos;
+	t_vector	dir;
+	t_ray		ray;
+	float		intensity;
+	float		to_obj_dist;
+	float		to_intersect_dist;
+}				t_light;
+
+t_color			ft_add_light(t_light *light, t_object *obj);
+void			ft_intersect_light(t_light *light, t_list *objects,
+					t_object *closest_obj, int *light_blocked);
+t_color			ft_ray_trace_light(t_list *lights, t_list *objects,
+					t_object *closest_obj);
 #endif

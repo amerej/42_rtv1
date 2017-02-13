@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 22:59:18 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/10 20:39:49 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/13 16:22:28 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		ft_parse_light(t_list **lights, char *line)
 	if (ft_tabstrlen(tab_str) == 2)
 	{
 		light = (t_light *)malloc(sizeof(t_light));
-		ft_init_vector(&light->position, tab_str[0]);
+		ft_init_vector(&light->pos, tab_str[0]);
 		light->intensity = atof(tab_str[1]);
 		ft_free_tabstr(tab_str);
 		ft_free_ptr((void **)&str);

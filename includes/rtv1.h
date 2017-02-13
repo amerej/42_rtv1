@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 17:37:31 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/11 00:06:11 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/13 20:10:27 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,13 @@
 # include <math.h>
 # include "../libft/libft.h"
 # include "../minilibx/osx/mlx.h"
-# include "parser.h"
 # include "keycode_osx.h"
+# include "parser.h"
 # include "image.h"
 # include "vector.h"
 # include "camera.h"
-# include "light.h"
-# include "object.h"
-# include "ray.h"
 # include "color.h"
-# include "limits.h"
+# include "light.h"
 
 typedef struct		s_scene
 {

@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 14:52:49 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/09 22:04:50 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/13 19:44:34 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ void			ft_cam_new(t_cam *cam)
 
 t_vector		ft_cam_get_dir(t_cam *cam, t_point_i p, int width, int height)
 {
-	double		x_indent;
-	double		y_indent;
+	float		x_indent;
+	float		y_indent;
 	t_vector	right;
 	t_vector	up;
 	t_vector	vp_up_left;
 	t_vector	dir;
 
-	x_indent = cam->vp_width / (double)width;
-	y_indent = cam->vp_height / (double)height;
+	x_indent = cam->vp_width / (float)width;
+	y_indent = cam->vp_height / (float)height;
 	right = ft_mult(ft_mult(cam->right, x_indent), p.x);
 	up = ft_mult(ft_mult(cam->up, y_indent), p.y);
 	vp_up_left = ft_add(cam->vp_up_left, ft_sub(right, up));
