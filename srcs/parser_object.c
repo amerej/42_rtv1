@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 22:59:18 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/14 19:26:43 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/14 22:00:03 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	ft_parse_sphere(t_list	**objects, char **tab_str, t_section type, int *id)
 	{
 		obj = (t_object *)malloc(sizeof(t_object));
 		obj->id = (*id)++;
-		printf("id sphere = %d\n", obj->id);
 		obj->type = type;
 		ft_init_vector(&obj->pos, tab_str[0]);
 		obj->radius = atof(tab_str[1]);
@@ -40,7 +39,6 @@ int	ft_parse_plane(t_list **objects, char **tab_str, t_section type, int *id)
 	{
 		obj = (t_object *)malloc(sizeof(t_object));
 		obj->id = (*id)++;
-		printf("id plane = %d\n", obj->id);
 		obj->type = type;
 		ft_init_vector(&obj->pos, tab_str[0]);
 		ft_init_vector(&obj->rot, tab_str[1]);
