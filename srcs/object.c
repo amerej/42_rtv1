@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/13 19:19:33 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/13 20:37:39 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/14 13:33:54 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,26 @@ int				ft_intersect_sphere(t_ray ray, t_object *obj)
 	return (FALSE);
 }
 
+int			ft_intersect_plane(t_ray ray, t_object *obj)
+{
+	float	t;
+	float	dv;
+
+	ft_normalize(&obj->rot);
+	dv = ft_dot(obj->rot, ray.dir);
+	if (dv == 0)
+		return (FALSE);
+	t = (-(ft_dot(obj->rot, ft_sub(ray.o, obj->pos))) / dv);
+	if (t < 0)
+		return (FALSE);
+	obj->inter_p = ft_add(ray.o, ft_mult(ray.dir, t));
+	if (dv < 0)
+		obj->normal = obj->rot;
+	else
+		obj->normal = ft_neg(obj->rot);
+	return (TRUE);
+}
+
 int			ft_intersect_object(t_ray ray, t_object *obj)
 {
 	if (obj->type == SPHERE)
@@ -52,11 +72,11 @@ int			ft_intersect_object(t_ray ray, t_object *obj)
 		if (ft_intersect_sphere(ray, obj))
 			return (TRUE);
 	}
-	// if (obj->type == PLANE)
-	// {
-	// 	if (ft_intersect_sphere(ray, obj))
-	// 		return (TRUE);
-	// }
+	if (obj->type == PLANE)
+	{
+		if (ft_intersect_plane(ray, obj))
+			return (TRUE);
+	}
 	// if (obj->type == CYLINDER)
 	// {
 	// 	if (ft_intersect_sphere(ray, obj))

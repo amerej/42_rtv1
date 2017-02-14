@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 11:19:49 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/13 20:37:05 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/14 13:29:56 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef	struct		s_object
 }					t_object;
 
 int				ft_intersect_sphere(t_ray ray, t_object *obj);
+int				ft_intersect_plane(t_ray ray, t_object *obj);
 int				ft_intersect_object(t_ray ray, t_object *obj);
 t_object		*ft_get_closest_object(t_ray ray, t_list *objects);
 #endif
