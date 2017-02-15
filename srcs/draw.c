@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 09:21:33 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/14 19:06:58 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/15 16:24:40 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,12 @@ t_color			ft_ray_trace(t_scene *sc, t_ray ray)
 	closest_obj = ft_get_closest_object(ray, sc->objects);
 	if (closest_obj)
 		color = ft_ray_trace_light(sc->lights, sc->objects, closest_obj);
-
-	ft_normalize_color(&color);
-	return (color);
+	return (ft_unit_color(color));
 }
 
 static void		ft_draw_img(t_scene *sc)
 {
 	t_ray		ray;
-	t_vector	dir;
 	t_point_i	p;
 
 	ft_cam_new(sc->cam);
@@ -54,9 +51,8 @@ static void		ft_draw_img(t_scene *sc)
 		while (p.x < sc->width)
 		{
 			ray.o = sc->cam->pos;
-			dir = ft_cam_get_dir(sc->cam, p, sc->width, sc->height);
-			ft_normalize(&dir);
-			ray.dir = dir;
+			ray.dir = ft_unit_vector(ft_cam_get_dir(sc->cam, p, sc->width,
+				sc->height));
 			ft_put_pixel_img(sc, p, ft_ray_trace(sc, ray));
 			++p.x;
 		}

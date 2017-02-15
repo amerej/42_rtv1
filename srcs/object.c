@@ -6,54 +6,66 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/13 19:19:33 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/14 22:35:10 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/15 17:51:01 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
 
-int				ft_intersect_sphere(t_ray ray, t_object *obj)
+// int		ft_closest_dist(t_ray r, t_object *obj, float *t)
+// {
+// 	float		a;
+// 	float		b;
+// 	float		c;
+// 	float		t1;
+// 	float		t2;
+// 	float		delta;
+// 	t_vector	x;
+//
+// 	x = ft_sub(r.o, obj->pos);
+// 	a = ft_dot(r.dir, r.dir);
+// 	b = ft_dot(r.dir, x) * 2.0;
+// 	c = ft_dot(x, x) - (obj->radius * obj->radius);
+// 	delta = (b * b) - (4 * a * c);
+// 	if (delta >= 0)
+// 	{
+// 		t1 = (-b + sqrt(delta)) / (2 * a);
+// 		t2 = (-b - sqrt(delta)) / (2 * a);
+// 		t = (t1 < t2) ? t1 : t2;
+// 		obj->intersection = ft_add(ray.o, ft_mult(ray.dir, t));
+// 		obj->normal = ft_unit_vector(ft_add(ft_mult(ray.dir, t), x));
+// 		return (TRUE);
+// 	}
+// 	return (FALSE);
+// }
+
+int			ft_intersect_sphere(t_ray ray, t_object *obj)
 {
-	obj->oc = ft_sub(ray.o, obj->pos);
-	obj->b = ft_dot(obj->oc, ray.dir);
-	obj->c = ft_squared_length(obj->oc) - (obj->radius * obj->radius);
-	obj->delta = ((obj->b * obj->b) - obj->c);
-	if (obj->delta >= 0)
+	float		a;
+	float		b;
+	float		c;
+	float		t1;
+	float		t2;
+	float		t;
+	float		delta;
+	t_vector	x;
+
+	x = ft_sub(ray.o, obj->pos);
+	a = ft_dot(ray.dir, ray.dir);
+	b = ft_dot(ray.dir, x) * 2.0;
+	c = ft_dot(x, x) - (obj->radius * obj->radius);
+	delta = (b * b) - (4 * a * c);
+	if (delta >= 0)
 	{
-		if (obj->delta != 0)
-		{
-			obj->delta = (float)sqrt(obj->delta);
-			obj->t1 = (-obj->b + obj->delta);
-			if (obj->t1 < 0)
-				return (FALSE);
-			obj->t2 = (-obj->b - obj->delta);
-			if (obj->t2 < 0)
-				return (FALSE);
-			obj->t = (obj->t1 < obj->t2) ? obj->t1 : obj->t2;
-		}
-		else
-			obj->t = (-obj->b);
-		obj->inter_p = ft_add(ray.o, ft_mult(ray.dir, obj->t));
-		obj->normal = ft_div(ft_sub(obj->inter_p, obj->pos), obj->radius);
+		t1 = (-b + sqrt(delta)) / (2 * a);
+		t2 = (-b - sqrt(delta)) / (2 * a);
+		t = (t1 < t2) ? t1 : t2;
+		obj->intersection = ft_add(ray.o, ft_mult(ray.dir, t));
+		obj->normal = ft_unit_vector(ft_add(ft_mult(ray.dir, t), x));
 		return (TRUE);
 	}
 	return (FALSE);
 }
-
-/*
-**	Ray
-**	p = o + d * t
-**
-**	Plane Intersect
-**	t = -x|v / d|v
-**
-**	x = ft_sub(ray.o, obj->pos)
-**	v = ft_unit_vector(obj->rot)
-**	d = ray.dir
-**	dv = ft_dot(d, v)
-**	xv = ft_dot(x, v)
-**	t = (-xv) / dv
-*/
 
 int			ft_intersect_plane(t_ray ray, t_object *obj)
 {
@@ -74,9 +86,24 @@ int			ft_intersect_plane(t_ray ray, t_object *obj)
 	t = -xv / dv;
 	if (t < 0)
 		return (FALSE);
-	obj->inter_p = ft_add(ray.o, ft_mult(d, t));
+	obj->intersection = ft_add(ray.o, ft_mult(d, t));
 	obj->normal = (dv < 0) ? v : ft_neg(v);
 	return (TRUE);
+}
+
+int			ft_intersect_cylinder(t_ray ray, t_object *obj)
+{
+	// t_vector	x;
+	// float		t;
+	//
+	// x = ft_sub(ray.o, obj->pos);
+	// if (ft_closest_dist(ray, obj, &t))
+	// {
+	// 	obj->intersection = ft_add(ray.o, ft_mult(ray.dir, t));
+	// 	obj->normal = ft_unit_vector(ft_add(ft_mult(ray.dir, t), x));
+	// 	return (TRUE);
+	// }
+	return (FALSE);
 }
 
 int			ft_intersect_object(t_ray ray, t_object *obj)
@@ -91,11 +118,11 @@ int			ft_intersect_object(t_ray ray, t_object *obj)
 		if (ft_intersect_plane(ray, obj))
 			return (TRUE);
 	}
-	// if (obj->type == CYLINDER)
-	// {
-	// 	if (ft_intersect_sphere(ray, obj))
-	// 		return (TRUE);
-	// }
+	if (obj->type == CYLINDER)
+	{
+		if (ft_intersect_cylinder(ray, obj))
+			return (TRUE);
+	}
 	// if (obj->type == CONE)
 	// {
 	// 	if (ft_intersect_sphere(ray, obj))
@@ -118,7 +145,7 @@ t_object	*ft_get_closest_object(t_ray ray, t_list *objects)
 		i_obj = (t_object *)objects->content;
 		if (ft_intersect_object(ray, i_obj))
 		{
-			tmp_dist = ft_squared_length(ft_sub(i_obj->inter_p, ray.o));
+			tmp_dist = ft_squared_length(ft_sub(i_obj->intersection, ray.o));
 			if (tmp_dist < dist)
 			{
 				dist = tmp_dist;

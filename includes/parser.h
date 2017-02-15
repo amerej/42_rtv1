@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 11:51:39 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/08 14:37:18 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/15 17:29:46 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef	enum	e_section
 				CAMERA,
 				SPHERE,
 				PLANE,
+				CYLINDER,
 				LIGHT,
 }				t_section;
 #endif

@@ -6,13 +6,13 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/13 17:33:19 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/13 17:42:22 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/15 15:42:12 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
 
-t_color		ft_mult_color(t_color c, double r)
+t_color		ft_mult_color(t_color c, float r)
 {
 	return ((t_color){c.r * r, c.g * r, c.b * r});
 }
@@ -29,12 +29,11 @@ t_color		ft_add_color(t_color a, t_color b)
 	return ((t_color){a.r += b.r, a.g += b.g, a.b += b.b});
 }
 
-void		ft_normalize_color(t_color *c)
+t_color		ft_unit_color(t_color c)
 {
-	if (c->r > 1.0)
-		c->r = 1.0;
-	if (c->g > 1.0)
-		c->g = 1.0;
-	if (c->b > 1.0)
-		c->b = 1.0;
+	t_color		color;
+	color.r = (c.r > 1.0) ? 1.0 : c.r;
+	color.g = (c.g > 1.0) ? 1.0 : c.g;
+	color.b = (c.b > 1.0) ? 1.0 : c.b;
+	return (color);
 }

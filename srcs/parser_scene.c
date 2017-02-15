@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 12:04:43 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/11 04:21:41 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/15 17:32:11 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		ft_set_scene(t_scene *sc, char *line, t_section *section)
 		ft_parse_camera(sc->cam, line);
 	else if (*section == LIGHT)
 		ft_parse_light(&sc->lights, line);
-	else if (*section == SPHERE || *section == PLANE)
+	else if (*section == SPHERE || *section == PLANE || *section == CYLINDER)
 		ft_parse_object(&sc->objects, line);
 }
 
@@ -30,6 +30,8 @@ void		ft_get_section_object(char *line, t_section *section)
 		*section = SPHERE;
 	else if (!ft_strncmp(line, "Plane:", 6))
 		*section = PLANE;
+	else if (!ft_strncmp(line, "Cylinder:", 9))
+		*section = CYLINDER;
 }
 
 int			ft_parse_scene(t_scene *sc, int fd)
