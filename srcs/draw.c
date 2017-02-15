@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 09:21:33 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/15 16:24:40 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/15 22:22:02 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_color			ft_ray_trace(t_scene *sc, t_ray ray)
 	t_object	*closest_obj;
 	t_color		color;
 
+	color = (t_color){0.0, 0.0, 0.0};
 	closest_obj = ft_get_closest_object(ray, sc->objects);
 	if (closest_obj)
 		color = ft_ray_trace_light(sc->lights, sc->objects, closest_obj);

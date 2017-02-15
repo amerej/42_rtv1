@@ -6,13 +6,13 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/13 17:33:19 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/15 15:42:12 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/15 21:50:32 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
 
-t_color		ft_mult_color(t_color c, float r)
+t_color		ft_mult_color(t_color c, double r)
 {
 	return ((t_color){c.r * r, c.g * r, c.b * r});
 }

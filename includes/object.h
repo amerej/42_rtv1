@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 11:19:49 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/15 17:34:54 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/15 20:07:31 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef	struct		s_object
 	t_section		type;
 	t_vector		pos;
 	t_vector		rot;
-	float			radius;
-	float			length;
+	double			radius;
+	double			length;
 	t_color			color;
 	t_vector		intersection;
 	t_vector		normal;

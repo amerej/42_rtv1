@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 10:49:00 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/13 16:55:14 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/15 20:07:35 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ typedef struct	s_ray
 {
 	t_vector	o;
 	t_vector	dir;
-	float		t;
+	double		t;
 }				t_ray;
 #endif

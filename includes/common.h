@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 18:52:34 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/13 15:55:56 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/15 20:07:21 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct		s_point_i
 
 typedef struct		s_point_f
 {
-	float			x;
-	float			y;
+	double			x;
+	double			y;
 }					t_point_f;
 #endif

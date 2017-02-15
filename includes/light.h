@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 11:51:39 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/13 20:35:22 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/15 22:19:16 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ typedef struct	s_light
 	t_vector	pos;
 	t_vector	dir;
 	t_ray		ray;
-	float		intensity;
-	float		to_obj_dist;
-	float		to_intersect_dist;
+	double		intensity;
+	double		to_obj_dist;
+	double		to_intersect_dist;
 }				t_light;
 
 t_color			ft_add_light(t_light *light, t_object *obj);

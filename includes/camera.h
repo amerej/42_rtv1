@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 11:51:39 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/13 20:33:26 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/15 20:07:06 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ typedef struct	s_cam
 	t_vector	up;
 	t_vector	right;
 	t_vector	vp_up_left;
-	float		vp_dist;
-	float		vp_height;
-	float		vp_width;
+	double		vp_dist;
+	double		vp_height;
+	double		vp_width;
 }				t_cam;
 
 void			ft_cam_new(t_cam *cam);
