@@ -6,20 +6,23 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 12:04:43 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/16 17:09:45 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/16 18:29:20 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void		ft_set_scene(t_scene *sc, char *line, t_section *section)
+int			ft_set_scene(t_scene *sc, char *line, t_section *section)
 {
+	int ret;
+
 	if (*section == CAMERA)
-		ft_parse_camera(sc->cam, line);
+		ret = ft_parse_camera(sc->cam, line);
 	else if (*section == LIGHT)
-		ft_parse_light(&sc->lights, line);
+		ret = ft_parse_light(&sc->lights, line);
 	else if (*section == SPHERE || *section == PLANE || *section == CYLINDER)
-		ft_parse_object(&sc->objects, line);
+		ret = ft_parse_object(&sc->objects, line);
+	return (ret);
 }
 
 void		ft_get_section_object(char *line, t_section *section)
@@ -46,7 +49,11 @@ int			ft_parse_scene(t_scene *sc, int fd)
 		else
 			section = NONE;
 		ft_get_section_object(line, &section);
-		ft_set_scene(sc, line, &section);
+		if (!ft_set_scene(sc, line, &section))
+		{
+			ft_free_ptr((void **)&line);
+			return (FALSE);
+		}
 		ft_free_ptr((void **)&line);
 	}
 	ft_free_ptr((void **)&line);

@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 14:52:49 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/15 20:06:15 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/16 17:49:59 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			ft_cam_new(t_cam *cam)
 	cam->vp_dist = 1.0;
 	cam->vp_height = 0.35;
 	cam->vp_width = 0.5;
-	dir = ft_sub(cam->look_at, cam->pos);
+	dir = ft_sub(cam->rot, cam->pos);
 	ft_normalize(&dir);
 	cam->right = ft_cross(cam->up, dir);
 	cam->up = ft_cross(dir, cam->right);

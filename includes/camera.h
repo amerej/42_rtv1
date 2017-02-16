@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 11:51:39 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/15 20:07:06 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/16 17:49:20 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 typedef struct	s_cam
 {
 	t_vector	pos;
-	t_vector	look_at;
+	t_vector	rot;
 	t_vector	up;
 	t_vector	right;
 	t_vector	vp_up_left;

@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/13 19:24:15 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/16 17:10:18 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/16 17:45:57 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_color		ft_add_light(t_light *light, t_object *obj)
 	vec = ft_sub(obj->intersection, light->pos);
 	angle = ft_dot(obj->normal, ft_neg(ft_unit_vector(vec)));
 	if (angle <= 0)
-		return ((t_color){0., 0., 0.});
+		return ((t_color){0.0, 0.0, 0.0});
 	c = ft_mult_color(ft_mult_color(obj->color, 1.0), angle);
 	return (c);
 }
