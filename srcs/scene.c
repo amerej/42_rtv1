@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 09:09:08 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/10 15:55:26 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/16 16:51:44 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static t_scene	*ft_init_scene(void)
 		perror("error : scene memory allocation");
 		return (NULL);
 	}
-	sc->width = 800;
-	sc->height = 600;
+	sc->width = 1280;
+	sc->height = 960;
 	sc->img = NULL;
 	sc->cam = NULL;
 	sc->objects = NULL;

@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 12:04:43 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/15 17:32:11 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/16 17:09:45 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 void		ft_set_scene(t_scene *sc, char *line, t_section *section)
 {
-	if (*section == RENDER)
-		ft_parse_render(sc, line);
-	else if (*section == CAMERA)
+	if (*section == CAMERA)
 		ft_parse_camera(sc->cam, line);
 	else if (*section == LIGHT)
 		ft_parse_light(&sc->lights, line);
@@ -41,9 +39,7 @@ int			ft_parse_scene(t_scene *sc, int fd)
 
 	while (ft_get_next_line(fd, &line))
 	{
-		if (!ft_strncmp(line, "Render:", 7))
-			section = RENDER;
-		else if (!ft_strncmp(line, "Camera:", 7))
+		if (!ft_strncmp(line, "Camera:", 7))
 			section = CAMERA;
 		else if (!ft_strncmp(line, "Light:", 6))
 			section = LIGHT;

@@ -12,7 +12,6 @@ SRC_NAME =	camera.c\
 			parser_camera.c\
 			parser_light.c\
 			parser_object.c\
-			parser_render.c\
 			parser_scene.c\
 			parser_toolbox.c\
 			scene.c\

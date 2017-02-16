@@ -1,18 +1,15 @@
-# Render: Width, Height
-Render: 800, 600
+#Camera: Position, Rotation
+Camera: 0 3 -15, 0 0 30
 
-# Camera: Position, LookAt
-Camera: 0.0 3.0 -15.0, 0.0 0.0 30.0
+#Sphere: Position, Radius, Color
+Sphere: 0 2 10, 1, 1 1 0
 
-# Sphere: Position, Radius, Color
-Sphere: 0.0 2.0 10.0, 1.0, 1.0 1.0 0.0
+#Plane: Position, Rotation, Color
+Plane: 0 -2 0, 0 1 0, 0 1 1
 
-# Cylinder: Position, Rotation, Radius, Length, Color
-# Cylinder: 0.0 2.0 10.0, 0.0 0.0 0.0, 2.0, 5.0, 1.0 1.0 0.0
+#Cylinder: Position, Rotation, Radius, Length, Color
+#Cylinder: 0 2 10, 0 0 0, 2, 5, 1 1 0
 
-# Plane: Position, Rotation, Color
-Plane: 0.0 -2.0 0.0, 0.0 1.0 0.0, 0.0 1.0 1.0
-
-# Light: Position Intensity
-Light: 3.0 3.0 0.0, 1.0
-Light: -3.0 3.0 0.0, 1.0
+#Light: Position
+Light: 3 3 0
+Light: -3 3 0
