@@ -104,6 +104,51 @@ int			ft_intersect_cylinder(t_ray ray, t_object *obj)
 	return (FALSE);
 }
 
+int			ft_intersect_cone(t_ray ray, t_object *obj)
+{
+	double		a;
+	double		b;
+	double		c;
+	double		t1;
+	double		t2;
+	double		t;
+	double		delta;
+	t_vector	x;
+	t_vector	v;
+	double		dv;
+	double		xv;
+	double		m;
+
+	v = ft_unit_vector(obj->rot);
+	dv = ft_dot(ray.dir, v);
+	x = ft_sub(ray.o, obj->pos);
+	xv = ft_dot(x, v);
+	a = ft_dot(ray.dir, ray.dir) - ((1 + obj->radius * obj->radius) * (dv * dv));
+	b = (ft_dot(ray.dir, x) - ((1 + obj->radius * obj->radius) * (dv * xv))) * 2.0;
+	c = ft_dot(x, x) - ((1 + obj->radius * obj->radius) * (xv * xv));
+	delta = (b * b) - (4 * a * c);
+	// printf("delta= %lf", delta);
+	if (delta >= 0)
+	{
+		t1 = (-b + sqrt(delta)) / (2 * a);
+		t2 = (-b - sqrt(delta)) / (2 * a);
+		t = (t1 < t2) ? t1 : t2;
+		obj->intersection = ft_add(ray.o, ft_mult(ray.dir, t));
+		m = ft_dot(ray.dir, v) * t + ft_dot(x, v);
+		// printf("m= %lf", m);
+		if (m >= 0 && m <= obj->length)
+		{
+			// obj->normal = ft_unit_vector(ft_sub(ft_sub(ray.dir, obj->pos), ft_mult(v, t)));
+			obj->normal = ft_unit_vector(ft_sub(ft_add(ft_mult(ray.dir, t), x), ft_mult(ft_mult(v, 1 + obj->radius * obj->radius), m)));
+			// printf("normal= %lf", obj->normal);
+		}
+		else
+			return (FALSE);
+		return (TRUE);
+	}
+	return (FALSE);
+}
+
 int			ft_intersect_object(t_ray ray, t_object *obj)
 {
 	if (obj->type == SPHERE)
@@ -121,11 +166,11 @@ int			ft_intersect_object(t_ray ray, t_object *obj)
 		if (ft_intersect_cylinder(ray, obj))
 			return (TRUE);
 	}
-	// if (obj->type == CONE)
-	// {
-	// 	if (ft_intersect_sphere(ray, obj))
-	// 		return (TRUE);
-	// }
+	if (obj->type == CONE)
+	{
+		if (ft_intersect_cone(ray, obj))
+	 		return (TRUE);
+	}
 	return (FALSE);
 }
 

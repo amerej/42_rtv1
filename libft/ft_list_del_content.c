@@ -14,6 +14,7 @@
 
 void		ft_list_del_content(void *content, size_t content_size)
 {
+    (void)content_size;
 	if (content)
 	{
 		free(content);

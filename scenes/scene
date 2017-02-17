@@ -10,6 +10,9 @@ Plane: 0 -2 0, 0 1 0
 #Cylinder: Position, Rotation
 Cylinder: 0 1 0, 0 1 0
 
+#Cone: Position, Rotation
+Cone: 7 3 0, 0 -1 0
+
 #Light: Position
 Light: 0 10 -50
 Light: 4 5 -50

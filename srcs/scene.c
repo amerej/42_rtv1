@@ -39,8 +39,8 @@ static t_scene	*ft_init_scene(void)
 		perror("error : scene memory allocation");
 		return (NULL);
 	}
-	sc->width = 1280;
-	sc->height = 960;
+	sc->width = 640;
+	sc->height = 480;
 	sc->img = NULL;
 	sc->cam = NULL;
 	sc->objects = NULL;

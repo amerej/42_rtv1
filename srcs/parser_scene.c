@@ -20,8 +20,9 @@ int			ft_set_scene(t_scene *sc, char *line, t_section *section)
 		ret = ft_parse_camera(sc->cam, line);
 	else if (*section == LIGHT)
 		ret = ft_parse_light(&sc->lights, line);
-	else if (*section == SPHERE || *section == PLANE || *section == CYLINDER)
+	else if (*section == SPHERE || *section == PLANE || *section == CYLINDER || *section == CONE)
 		ret = ft_parse_object(&sc->objects, line);
+	ret = 1;
 	return (ret);
 }
 
@@ -33,6 +34,8 @@ void		ft_get_section_object(char *line, t_section *section)
 		*section = PLANE;
 	else if (!ft_strncmp(line, "Cylinder:", 9))
 		*section = CYLINDER;
+	else if (!ft_strncmp(line, "Cone:", 5))
+		*section = CONE;
 }
 
 int			ft_parse_scene(t_scene *sc, int fd)

@@ -21,6 +21,7 @@ typedef	enum	e_section
 				SPHERE,
 				PLANE,
 				CYLINDER,
+				CONE,
 				LIGHT,
 }				t_section;
 #endif
