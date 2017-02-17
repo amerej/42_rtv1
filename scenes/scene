@@ -8,7 +8,7 @@ Sphere: -7 2 0
 Plane: 0 -2 0, 0 1 0
 
 #Cylinder: Position, Rotation
-#Cylinder: 0 2 10, 0 0 0
+Cylinder: 0 1 0, 0 1 0
 
 #Light: Position
 Light: 0 10 -50

@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/13 19:19:33 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/16 17:37:21 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/17 11:55:18 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int			ft_intersect_cylinder(t_ray ray, t_object *obj)
 	xv = ft_dot(x, v);
 	a = ft_dot(ray.dir, ray.dir) - (dv * dv);
 	b = (ft_dot(ray.dir, x) - (dv * xv)) * 2.0;
-	c = ft_dot(x, x) - ((xv * xv) - (obj->radius * obj->radius));
+	c = ft_dot(x, x) - (xv * xv) - (obj->radius * obj->radius);
 	delta = (b * b) - (4 * a * c);
 	if (delta >= 0)
 	{

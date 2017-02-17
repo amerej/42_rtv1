@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 22:59:18 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/16 19:55:40 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/17 11:02:18 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ int	ft_parse_cylinder(t_list **objects, char **tab_str, t_section type, int *id)
 	obj->type = type;
 	ft_init_vector(&obj->pos, tab_str[0]);
 	ft_init_vector(&obj->rot, tab_str[1]);
-	obj->radius = 2.0;
+	obj->radius = 1.0;
 	obj->length = 2.0;
-	obj->color = (t_color){1.0, 0.0, 1.0};
+	obj->color = (t_color){0.0, 1.0, 1.0};
 	ft_list_push_back(objects, ft_list_new(obj, sizeof(t_object)));
 	ft_free_ptr((void **)&obj);
 	return (TRUE);
