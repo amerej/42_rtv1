@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 09:14:54 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/20 13:39:53 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/20 13:51:13 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ int			main(int argc, char *argv[])
 {
 	t_scene		*sc;
 	int			fd;
+
+	if (argc != 2)
+	{
+		ft_putstr("Error : No arguments\n");
+		return (FALSE);
+	}
 
 	fd = open(argv[1], O_RDONLY);
 	if (!(sc = ft_new_scene(fd)))
