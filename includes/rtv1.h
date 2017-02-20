@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 17:37:31 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/16 19:31:03 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/20 15:23:47 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,9 @@ void				ft_destroy_scene(t_scene *sc);
 void				ft_draw_window(t_scene *sc);
 int					ft_expose_hook(t_scene *sc);
 int					ft_key_hook(int keycode, t_scene *sc);
-/*
-**	Parser
-*/
 int					ft_parse_scene(t_scene *sc, int fd);
 int					ft_parse_render(t_scene *sc, char *line);
-int					ft_parse_camera(t_cam *cam, char *line);
+int					ft_parse_camera(t_scene *sc, char *line);
 int					ft_parse_light(t_list **lights, char *line);
 int					ft_parse_object(t_list **objects, char *line);
 int					ft_init_vector(t_vector *v, char *line);

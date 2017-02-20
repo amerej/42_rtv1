@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 09:09:08 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/20 10:53:35 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/20 16:32:41 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,6 @@ static t_img	*ft_init_img(void)
 	if (!(img = (t_img *)malloc(sizeof(t_img))))
 		perror("error : img memory allocation");
 	return (img);
-}
-
-static t_cam	*ft_init_cam(void)
-{
-	t_cam	*cam;
-
-	if (!(cam = (t_cam *)malloc(sizeof(t_cam))))
-		perror("error : cam memory allocation");
-	return (cam);
 }
 
 static t_scene	*ft_init_scene(void)
@@ -55,8 +46,6 @@ t_scene			*ft_new_scene(int fd)
 	if (!(sc = ft_init_scene()))
 		return (NULL);
 	else if (!(sc->img = ft_init_img()))
-		return (NULL);
-	else if (!(sc->cam = ft_init_cam()))
 		return (NULL);
 	else if (!ft_parse_scene(sc, fd))
 		return (NULL);

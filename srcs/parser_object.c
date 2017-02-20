@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 22:59:18 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/20 10:52:13 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/20 16:26:41 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ int	ft_parse_cylinder(t_list **objects, char **tab_str, t_section type, int *id)
 	obj = (t_object *)malloc(sizeof(t_object));
 	obj->id = (*id)++;
 	obj->type = type;
-	ft_init_vector(&obj->pos, tab_str[0]);
-	ft_init_vector(&obj->rot, tab_str[1]);
+	if (!ft_init_vector(&obj->pos, tab_str[0]) ||
+		!ft_init_vector(&obj->rot, tab_str[1]))
+		return (FALSE);
 	obj->radius = 1.0;
 	obj->length = 2.0;
 	obj->color = (t_color){0.0, 1.0, 1.0};
@@ -82,8 +83,9 @@ int	ft_parse_cone(t_list **objects, char **tab_str, t_section type, int *id)
 	obj = (t_object *)malloc(sizeof(t_object));
 	obj->id = (*id)++;
 	obj->type = type;
-	ft_init_vector(&obj->pos, tab_str[0]);
-	ft_init_vector(&obj->rot, tab_str[1]);
+	if (!ft_init_vector(&obj->pos, tab_str[0]) ||
+		!ft_init_vector(&obj->rot, tab_str[1]))
+		return (FALSE);
 	obj->radius = 0.5;
 	obj->length = 2.0;
 	obj->color = (t_color){0.0, 1.0, 1.0};
@@ -101,6 +103,7 @@ int	ft_parse_object(t_list **objects, char *line)
 	static int	id = 0;
 
 	type = line;
+	ret = 0;
 	str = ft_strchr(line, ':');
 	type = ft_strsub(type, 0, str - type);
 	str = ft_strtrim(str + 1);
