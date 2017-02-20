@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/13 16:36:54 by aditsch           #+#    #+#             */
-/*   Updated: 2017/01/21 14:09:17 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/20 13:46:36 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void		ft_free_ptr_strjoin(void *s1, void *s2, char mask)
 	}
 }
 
-char	*ft_strjoin_free(char const *s1, char const *s2, char mask)
+char			*ft_strjoin_free(char const *s1, char const *s2, char mask)
 {
 	char	*ret;
 

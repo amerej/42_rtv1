@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 16:20:47 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/20 10:59:26 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/20 13:42:35 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,6 @@ double		ft_length(t_vector v)
 double		ft_squared_length(t_vector v)
 {
 	return (v.x * v.x + v.y * v.y + v.z * v.z);
-}
-
-void		ft_normalize(t_vector *v)
-{
-	double	factor;
-
-	factor = 1. / sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
-	v->x *= factor;
-	v->y *= factor;
-	v->z *= factor;
 }
 
 double		ft_dot(t_vector vec_1, t_vector vec_2)

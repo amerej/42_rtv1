@@ -6,12 +6,12 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 11:19:49 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/20 12:01:26 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/20 13:45:35 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECT_H
- #define OBJECT_H
+# define OBJECT_H
 
 # include "parser.h"
 # include "vector.h"
@@ -49,8 +49,11 @@ typedef	struct		s_object
 	t_vector		normal;
 }					t_object;
 
-int				ft_intersect_sphere(t_ray ray, t_object *obj);
-int				ft_intersect_plane(t_ray ray, t_object *obj);
-int				ft_intersect_object(t_ray ray, t_object *obj);
-t_object		*ft_get_closest_object(t_ray ray, t_list *objects);
+int					ft_intersect_sphere(t_ray ray, t_object *obj);
+int					ft_intersect_plane(t_ray ray, t_object *obj);
+int					ft_intersect_cylinder(t_ray ray, t_object *obj);
+int					ft_intersect_cone(t_ray ray, t_object *obj);
+int					ft_intersect_object(t_ray ray, t_object *obj);
+t_object			*ft_get_closest_object(t_ray ray, t_list *objects);
+void				ft_get_distance(t_op *op);
 #endif

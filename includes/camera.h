@@ -6,12 +6,12 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 11:51:39 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/16 20:23:20 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/20 13:43:42 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAM_H
-# define CAM_H
+#ifndef CAMERA_H
+# define CAMERA_H
 
 # include "vector.h"
 # include "common.h"

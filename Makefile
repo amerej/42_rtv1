@@ -8,6 +8,10 @@ SRC_NAME =	camera.c\
 			event.c\
 			light.c\
 			main.c\
+			obj_cone.c\
+			obj_cylinder.c\
+			obj_plane.c\
+			obj_sphere.c\
 			object.c\
 			parser_camera.c\
 			parser_light.c\
