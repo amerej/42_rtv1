@@ -6,11 +6,11 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/13 19:24:15 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/16 17:45:57 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/20 10:51:41 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "light.h"
+#include "light.h"
 
 t_color		ft_add_light(t_light *light, t_object *obj)
 {

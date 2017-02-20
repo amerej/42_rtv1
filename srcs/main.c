@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 09:14:54 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/07 22:51:18 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/20 10:51:23 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int			main(int argc, char *argv[])
 	int			fd;
 
 	fd = open(argv[1], O_RDONLY);
-
 	if (!(sc = ft_new_scene(fd)))
 	{
 		ft_destroy_scene(sc);

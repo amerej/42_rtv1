@@ -6,36 +6,39 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/13 19:19:33 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/17 11:55:18 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/20 12:06:55 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
 #include "float.h"
 
+void		ft_compute_delta_sphere(t_ray ray, t_object *obj, t_op *op)
+{
+	op->a = ft_dot(ray.dir, ray.dir);
+	op->b = ft_dot(ray.dir, op->x) * 2.0;
+	op->c = ft_dot(op->x, op->x) - (obj->radius * obj->radius);
+	op->delta = (op->b * op->b) - (4 * op->a * op->c);
+}
+
+void		ft_get_distance(t_op *op)
+{
+	op->t1 = (-op->b + sqrt(op->delta)) / (2 * op->a);
+	op->t2 = (-op->b - sqrt(op->delta)) / (2 * op->a);
+	op->t = (op->t1 < op->t2) ? op->t1 : op->t2;
+}
+
 int			ft_intersect_sphere(t_ray ray, t_object *obj)
 {
-	double		a;
-	double		b;
-	double		c;
-	double		t1;
-	double		t2;
-	double		t;
-	double		delta;
-	t_vector	x;
+	t_op	op;
 
-	x = ft_sub(ray.o, obj->pos);
-	a = ft_dot(ray.dir, ray.dir);
-	b = ft_dot(ray.dir, x) * 2.0;
-	c = ft_dot(x, x) - (obj->radius * obj->radius);
-	delta = (b * b) - (4 * a * c);
-	if (delta >= 0)
+	op.x = ft_sub(ray.o, obj->pos);
+	ft_compute_delta_sphere(ray, obj, &op);
+	if (op.delta >= 0)
 	{
-		t1 = (-b + sqrt(delta)) / (2 * a);
-		t2 = (-b - sqrt(delta)) / (2 * a);
-		t = (t1 < t2) ? t1 : t2;
-		obj->intersection = ft_add(ray.o, ft_mult(ray.dir, t));
-		obj->normal = ft_unit_vector(ft_add(ft_mult(ray.dir, t), x));
+		ft_get_distance(&op);
+		obj->intersection = ft_add(ray.o, ft_mult(ray.dir, op.t));
+		obj->normal = ft_unit_vector(ft_add(ft_mult(ray.dir, op.t), op.x));
 		return (TRUE);
 	}
 	return (FALSE);
@@ -43,51 +46,54 @@ int			ft_intersect_sphere(t_ray ray, t_object *obj)
 
 int			ft_intersect_plane(t_ray ray, t_object *obj)
 {
-	t_vector	v;
-	t_vector	d;
-	t_vector	x;
-	double		dv;
-	double		xv;
-	double		t;
+	t_op	op;
 
-	d = ray.dir;
-	v = ft_unit_vector(obj->rot);
-	x = ft_sub(ray.o, obj->pos);
-	dv = ft_dot(d, v);
-	if (dv == 0)
+	op.d = ray.dir;
+	op.v = ft_unit_vector(obj->rot);
+	op.x = ft_sub(ray.o, obj->pos);
+	op.dv = ft_dot(op.d, op.v);
+	if (op.dv == 0)
 		return (FALSE);
-	xv = ft_dot(x, v);
-	t = -xv / dv;
-	if (t < 0)
+	op.xv = ft_dot(op.x, op.v);
+	op.t = -op.xv / op.dv;
+	if (op.t < 0)
 		return (FALSE);
-	obj->intersection = ft_add(ray.o, ft_mult(d, t));
-	obj->normal = (dv < 0) ? v : ft_neg(v);
+	obj->intersection = ft_add(ray.o, ft_mult(op.d, op.t));
+	obj->normal = (op.dv < 0) ? op.v : ft_neg(op.v);
 	return (TRUE);
+}
+
+void		ft_compute_delta_cylinder(t_ray ray, t_object *obj, t_op *op)
+{
+	op->a = ft_dot(ray.dir, ray.dir);
+	op->b = ft_dot(ray.dir, op->x) * 2.0;
+	op->c = ft_dot(op->x, op->x) - (obj->radius * obj->radius);
+	op->delta = (op->b * op->b) - (4 * op->a * op->c);
 }
 
 int			ft_intersect_cylinder(t_ray ray, t_object *obj)
 {
-	double		a;
-	double		b;
-	double		c;
+	// double		a;
+	// double		b;
+	// double		c;
 	double		t1;
 	double		t2;
 	double		t;
-	double		delta;
+	// double		delta;
 	t_vector	x;
 	t_vector	v;
 	double		dv;
 	double		xv;
 	double		m;
 
-	v = ft_unit_vector(obj->rot);
+	op.v = ft_unit_vector(obj->rot);
 	dv = ft_dot(ray.dir, v);
 	x = ft_sub(ray.o, obj->pos);
 	xv = ft_dot(x, v);
-	a = ft_dot(ray.dir, ray.dir) - (dv * dv);
-	b = (ft_dot(ray.dir, x) - (dv * xv)) * 2.0;
-	c = ft_dot(x, x) - (xv * xv) - (obj->radius * obj->radius);
-	delta = (b * b) - (4 * a * c);
+	// a = ft_dot(ray.dir, ray.dir) - (dv * dv);
+	// b = (ft_dot(ray.dir, x) - (dv * xv)) * 2.0;
+	// c = ft_dot(x, x) - (xv * xv) - (obj->radius * obj->radius);
+	// delta = (b * b) - (4 * a * c);
 	if (delta >= 0)
 	{
 		t1 = (-b + sqrt(delta)) / (2 * a);
@@ -95,10 +101,7 @@ int			ft_intersect_cylinder(t_ray ray, t_object *obj)
 		t = (t1 < t2) ? t1 : t2;
 		obj->intersection = ft_add(ray.o, ft_mult(ray.dir, t));
 		m = ft_dot(ray.dir, ft_mult(v, t)) + ft_dot(x, v);
-		if (m >= 0 && m <= obj->length)
-			obj->normal = ft_unit_vector(ft_sub(ft_add(ft_mult(ray.dir, t), x), ft_mult(v, m)));
-		else
-			return (FALSE);
+		obj->normal = ft_unit_vector(ft_sub(ft_add(ft_mult(ray.dir, t), x), ft_mult(v, m)));
 		return (TRUE);
 	}
 	return (FALSE);
@@ -127,7 +130,6 @@ int			ft_intersect_cone(t_ray ray, t_object *obj)
 	b = (ft_dot(ray.dir, x) - ((1 + obj->radius * obj->radius) * (dv * xv))) * 2.0;
 	c = ft_dot(x, x) - ((1 + obj->radius * obj->radius) * (xv * xv));
 	delta = (b * b) - (4 * a * c);
-	// printf("delta= %lf", delta);
 	if (delta >= 0)
 	{
 		t1 = (-b + sqrt(delta)) / (2 * a);
@@ -135,15 +137,7 @@ int			ft_intersect_cone(t_ray ray, t_object *obj)
 		t = (t1 < t2) ? t1 : t2;
 		obj->intersection = ft_add(ray.o, ft_mult(ray.dir, t));
 		m = ft_dot(ray.dir, v) * t + ft_dot(x, v);
-		// printf("m= %lf", m);
-		if (m >= 0 && m <= obj->length)
-		{
-			// obj->normal = ft_unit_vector(ft_sub(ft_sub(ray.dir, obj->pos), ft_mult(v, t)));
-			obj->normal = ft_unit_vector(ft_sub(ft_add(ft_mult(ray.dir, t), x), ft_mult(ft_mult(v, 1 + obj->radius * obj->radius), m)));
-			// printf("normal= %lf", obj->normal);
-		}
-		else
-			return (FALSE);
+		obj->normal = ft_unit_vector(ft_sub(ft_add(ft_mult(ray.dir, t), x), ft_mult(ft_mult(v, 1 + obj->radius * obj->radius), m)));
 		return (TRUE);
 	}
 	return (FALSE);

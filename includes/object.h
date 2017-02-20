@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/04 11:19:49 by aditsch           #+#    #+#             */
-/*   Updated: 2017/02/15 20:07:31 by aditsch          ###   ########.fr       */
+/*   Updated: 2017/02/20 12:01:26 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,23 @@
 # include "color.h"
 # include "ray.h"
 # include "../libft/libft.h"
+
+typedef struct		s_op
+{
+	double			a;
+	double			b;
+	double			c;
+	double			t1;
+	double			t2;
+	t_vector		x;
+	t_vector		v;
+	t_vector		d;
+	double			dv;
+	double			xv;
+	double			t;
+	double			delta;
+	double			m;
+}					t_op;
 
 typedef	struct		s_object
 {
